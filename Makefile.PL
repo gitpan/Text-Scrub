@@ -23,11 +23,11 @@ my $tests = join ' ',unix2os('t/Text/Scrub.t');
 WriteMakefile(
     NAME => 'Text::Scrub',
     DISTNAME => 'Text-Scrub',
-    VERSION  => '0.01',
+    VERSION  => '0.02',
     dist     => {COMPRESS => 'gzip',
                 'gz' => 'gz'},
     test     => {TESTS => $tests},
-    PREREQ_PM => {'File::Package' => '0',},
+    
     
 
     ($] >= 5.005 ?     

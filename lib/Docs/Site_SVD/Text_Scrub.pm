@@ -10,18 +10,19 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.01';
-$DATE = '2003/07/05';
+$VERSION = '0.02';
+$DATE = '2003/07/27';
 $FILE = __FILE__;
 
 use vars qw(%INVENTORY);
 %INVENTORY = (
-    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.01 2003/07/05), 'revised 0.02'],
-    'MANIFEST' => [qw(0.01 2003/07/05), 'generated, replaces 0.02'],
-    'Makefile.PL' => [qw(0.01 2003/07/05), 'generated, replaces 0.02'],
-    'README' => [qw(0.01 2003/07/05), 'generated, replaces 0.02'],
-    'lib/Text/Scrub.pm' => [qw(1.09 2003/07/05), 'revised 1.08'],
-    't/Text/Scrub.t' => [qw(0.06 2003/07/05), 'revised 0.05'],
+    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.02 2003/07/27), 'revised 0.01'],
+    'MANIFEST' => [qw(0.02 2003/07/27), 'generated, replaces 0.01'],
+    'Makefile.PL' => [qw(0.02 2003/07/27), 'generated, replaces 0.01'],
+    'README' => [qw(0.02 2003/07/27), 'generated, replaces 0.01'],
+    'lib/Text/Scrub.pm' => [qw(1.09 2003/07/05), 'unchanged'],
+    't/Text/Scrub.t' => [qw(0.07 2003/07/27), 'revised 0.06'],
+    'tlib/File/Package.pm' => [qw(1.11 2003/07/27), 'new'],
 
 );
 
@@ -48,11 +49,11 @@ use vars qw(%INVENTORY);
 
  Text::Scrub - Utilites to wild card parts of a text file for comparisons.
 
- Revision: -
+ Revision: A
 
- Version: 0.01
+ Version: 0.02
 
- Date: 2003/07/05
+ Date: 2003/07/27
 
  Prepared for: General Public 
 
@@ -91,7 +92,7 @@ pieces of software to see if there are significant changes.
 
 =head2 1.3 Document overview.
 
-This document releases Text::Scrub version 0.01
+This document releases Text::Scrub version 0.02
 providing a description of the inventory, installation
 instructions and other information necessary to
 utilize and track this release.
@@ -107,8 +108,8 @@ system file specification.
 This document releases the file found
 at the following repository(s):
 
-   http://www.softwarediamonds/packages/Text-Scrub-0.01
-   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.01
+   http://www.softwarediamonds/packages/Text-Scrub-0.02
+   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.02
 
 
 Restrictions regarding duplication and license provisions
@@ -176,26 +177,22 @@ consists of the following files:
 
  file                                                         version date       comment
  ------------------------------------------------------------ ------- ---------- ------------------------
- lib/Docs/Site_SVD/Text_Scrub.pm                              0.01    2003/07/05 revised 0.02
- MANIFEST                                                     0.01    2003/07/05 generated, replaces 0.02
- Makefile.PL                                                  0.01    2003/07/05 generated, replaces 0.02
- README                                                       0.01    2003/07/05 generated, replaces 0.02
- lib/Text/Scrub.pm                                            1.09    2003/07/05 revised 1.08
- t/Text/Scrub.t                                               0.06    2003/07/05 revised 0.05
+ lib/Docs/Site_SVD/Text_Scrub.pm                              0.02    2003/07/27 revised 0.01
+ MANIFEST                                                     0.02    2003/07/27 generated, replaces 0.01
+ Makefile.PL                                                  0.02    2003/07/27 generated, replaces 0.01
+ README                                                       0.02    2003/07/27 generated, replaces 0.01
+ lib/Text/Scrub.pm                                            1.09    2003/07/05 unchanged
+ t/Text/Scrub.t                                               0.07    2003/07/27 revised 0.06
+ tlib/File/Package.pm                                         1.11    2003/07/27 new
 
 
 =head2 3.3 Changes
-
-The file names from 0.02 were changed as follows:
-
-  
-   return if $file =~ s=Test/STD=Text=;
 
 The changes are as follows:
 
 =over 4
 
-=item Test::STD::Scrub 0.01
+=item Test-STD-Scrub 0.01
 
 =over 4
 
@@ -221,13 +218,24 @@ Added the scrub_data and scrub_probe methods
 
 =back
 
-=item Test::STD::Scrub 0.02
+=item Test-STD-Scrub 0.02
 
 Use the new modules from the break-up of the "File::FileUtil" module
 
-=item Text::Scrub 0.01
+=item Text-Scrub-0.01
 
 Moved to a more appropriate library location.
+
+=item Text-Scrub-0.02
+
+Change the test so that test support program modules resides in distribution
+directory tlib directory instead of the lib directory. 
+Because they are no longer in the lib directory, 
+test support files will not be installed as a pre-condition for the 
+test of this module.
+The test of this module will precede immediately.
+The test support files in the tlib directory will vanish after
+the installtion.
 
 =back
 
@@ -235,15 +243,6 @@ Moved to a more appropriate library location.
 
 This installation requires that the installation site
 has the Perl programming language installed.
-Installation sites running Microsoft Operating systems require
-the installation of Unix utilities. 
-An excellent, highly recommended Unix utilities for Microsoft
-operating systems is unxutils by Karl M. Syring.
-A copy is available at the following web sites:
-
- http://unxutils.sourceforge.net
- http://packages.SoftwareDiamnds.com
-
 There are no other additional requirements or tailoring needed of 
 configurations files, adaptation data or other software needed for this
 installation particular to any installation site.
@@ -271,13 +270,13 @@ Follow the instructions for the the chosen installation software.
 
 The distribution file is at the following respositories:
 
-   http://www.softwarediamonds/packages/Text-Scrub-0.01
-   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.01
+   http://www.softwarediamonds/packages/Text-Scrub-0.02
+   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.02
 
 
 =item Prerequistes.
 
- 'File::Package' => '0',
+ None.
 
 
 =item Security, privacy, or safety precautions.
@@ -351,7 +350,13 @@ extension for a Perl test script file
 
 =head1 2.0 SEE ALSO
 
-L<Text::Scrub|Text::Scrub>
+=over 4
+
+=item L<File::Scrub|File::Scrub> 
+
+=item L<Docs::US_DOD::SVD|Docs::US_DOD::SVD> 
+
+=back
 
 =for html
 <hr>
@@ -378,11 +383,11 @@ __DATA__
 DISTNAME: Text-Scrub^
 REPOSITORY_DIR: packages^
 
-VERSION : 0.01^
+VERSION : 0.02^
 FREEZE: 1^
-PREVIOUS_DISTNAME: Test-STD-Scrub^
-PREVIOUS_RELEASE: 0.02^
-REVISION: -^
+PREVIOUS_DISTNAME:  ^
+PREVIOUS_RELEASE: 0.01^
+REVISION: A^
 
 AUTHOR  : SoftwareDiamonds.com E<lt>support@SoftwareDiamonds.comE<gt>^
 ABSTRACT: Utilites to wild card parts of a text file for comparisons.^
@@ -403,31 +408,25 @@ COMPRESS: gzip^
 COMPRESS_SUFFIX: gz^
 
 RESTRUCTURE:  ^
-
-CHANGE2CURRENT:  
-  return if $file =~ s=Test/STD=Text=;
-^
+CHANGE2CURRENT:  ^
 
 AUTO_REVISE: 
 lib/Text/Scrub.pm
 t/Text/Scrub.t
+lib/File/Package.pm => tlib/File/Package.pm
 ^
 
-PREREQ_PM: 
-'File::Package' => '0',
-^
-
+PREREQ_PM:  ^
 TESTS: t/Text/Scrub.t^
 
 EXE_FILES:  ^
-
 CHANGES:
 
 The changes are as follows:
 
 \=over 4
 
-\=item Test::STD::Scrub 0.01
+\=item Test-STD-Scrub 0.01
 
 \=over 4
 
@@ -453,13 +452,24 @@ Added the scrub_data and scrub_probe methods
 
 \=back
 
-\=item Test::STD::Scrub 0.02
+\=item Test-STD-Scrub 0.02
 
 Use the new modules from the break-up of the "File::FileUtil" module
 
-\=item Text::Scrub 0.01
+\=item Text-Scrub-0.01
 
 Moved to a more appropriate library location.
+
+\=item Text-Scrub-0.02
+
+Change the test so that test support program modules resides in distribution
+directory tlib directory instead of the lib directory. 
+Because they are no longer in the lib directory, 
+test support files will not be installed as a pre-condition for the 
+test of this module.
+The test of this module will precede immediately.
+The test support files in the tlib directory will vanish after
+the installtion.
 
 \=back
 
@@ -597,10 +607,16 @@ extension for a Perl test script file
 \=back
 ^
 
-SEE_ALSO:
-L<Text::Scrub|Text::Scrub>
+SEE_ALSO: 
+\=over 4
 
+\=item L<File::Scrub|File::Scrub> 
+
+\=item L<Docs::US_DOD::SVD|Docs::US_DOD::SVD> 
+
+\=back
 ^
+
 
 HTML:
 <hr>

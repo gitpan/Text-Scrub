@@ -4,3 +4,4 @@ Makefile.PL
 README
 lib/Text/Scrub.pm
 t/Text/Scrub.t
+tlib/File/Package.pm
