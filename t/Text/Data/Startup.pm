@@ -12,8 +12,8 @@ use warnings::register;
 use attributes;
 
 use vars qw( $VERSION $DATE $FILE);
-$VERSION = '0.05';
-$DATE = '2004/05/10';
+$VERSION = '0.07';
+$DATE = '2004/05/24';
 $FILE = __FILE__;
 
 #######
@@ -98,7 +98,7 @@ sub config
      if(@$array == 1)  {
          return ($array->[0], $self->{$array->[0]});
      }
-     elsif(@$array) {
+     elsif(@$array && ${$array}[0]) {
          if(@$array %  2 == 0) {
             my %hash = @$array;
             $options_override = \%hash;
@@ -604,7 +604,7 @@ distribution.
 
 =item 3
 
-The installation of the binary or source
+Commercial installation of the binary or source
 must visually present to the installer 
 the above copyright notice,
 this list of conditions intact,
@@ -612,7 +612,10 @@ that the original source is available
 at http://softwarediamonds.com
 and provide means
 for the installer to actively accept
-the list of conditions.
+the list of conditions; 
+otherwise, a license fee must be paid to
+Softwareware Diamonds.
+
 
 =back
 

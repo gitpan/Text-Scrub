@@ -10,26 +10,26 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.06';
-$DATE = '2004/05/10';
+$VERSION = '0.07';
+$DATE = '2004/05/24';
 $FILE = __FILE__;
 
 use vars qw(%INVENTORY);
 %INVENTORY = (
-    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.06 2004/05/10), 'revised 0.05'],
-    'MANIFEST' => [qw(0.06 2004/05/10), 'generated, replaces 0.05'],
-    'Makefile.PL' => [qw(0.06 2004/05/10), 'generated, replaces 0.05'],
-    'README' => [qw(0.06 2004/05/10), 'generated, replaces 0.05'],
-    'lib/Text/Scrub.pm' => [qw(1.13 2004/05/10), 'revised 1.12'],
-    't/Text/Scrub.d' => [qw(0.03 2004/05/10), 'revised 0.02'],
-    't/Text/Scrub.pm' => [qw(0.03 2004/05/10), 'revised 0.02'],
-    't/Text/Scrub.t' => [qw(0.1 2004/05/10), 'revised 0.09'],
-    't/Text/File/Package.pm' => [qw(1.17 2004/05/10), 'revised 1.16'],
-    't/Text/Test/Tech.pm' => [qw(1.23 2004/05/10), 'revised 1.22'],
-    't/Text/Data/Secs2.pm' => [qw(1.21 2004/05/10), 'revised 1.19'],
-    't/Text/File/SmartNL.pm' => [qw(1.15 2004/05/10), 'revised 1.14'],
-    't/Text/Data/SecsPack.pm' => [qw(0.06 2004/05/10), 'revised 0.04'],
-    't/Text/Data/Startup.pm' => [qw(0.05 2004/05/10), 'revised 0.04'],
+    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.07 2004/05/24), 'revised 0.06'],
+    'MANIFEST' => [qw(0.07 2004/05/24), 'generated, replaces 0.06'],
+    'Makefile.PL' => [qw(0.07 2004/05/24), 'generated, replaces 0.06'],
+    'README' => [qw(0.07 2004/05/24), 'generated, replaces 0.06'],
+    'lib/Text/Scrub.pm' => [qw(1.16 2004/05/24), 'revised 1.13'],
+    't/Text/Scrub.d' => [qw(0.03 2004/05/10), 'unchanged'],
+    't/Text/Scrub.pm' => [qw(0.03 2004/05/10), 'unchanged'],
+    't/Text/Scrub.t' => [qw(0.1 2004/05/10), 'unchanged'],
+    't/Text/File/Package.pm' => [qw(1.18 2004/05/24), 'revised 1.17'],
+    't/Text/Test/Tech.pm' => [qw(1.26 2004/05/24), 'revised 1.23'],
+    't/Text/Data/Secs2.pm' => [qw(1.26 2004/05/24), 'revised 1.21'],
+    't/Text/File/SmartNL.pm' => [qw(1.16 2004/05/24), 'revised 1.15'],
+    't/Text/Data/Str2Num.pm' => [qw(0.08 2004/05/24), 'new'],
+    't/Text/Data/Startup.pm' => [qw(0.07 2004/05/24), 'revised 0.05'],
 
 );
 
@@ -48,19 +48,23 @@ use vars qw(%INVENTORY);
 
 
 
+=head1 NAME
+
+Docs::Site_SVD::Text_Scrub - Utilites to wild card parts of a text file for comparisons.
+
 =head1 Title Page
 
  Software Version Description
 
  for
 
- Text::Scrub - Utilites to wild card parts of a text file for comparisons.
+ Docs::Site_SVD::Text_Scrub - Utilites to wild card parts of a text file for comparisons.
 
- Revision: E
+ Revision: F
 
- Version: 0.06
+ Version: 0.07
 
- Date: 2004/05/10
+ Date: 2004/05/24
 
  Prepared for: General Public 
 
@@ -99,7 +103,7 @@ pieces of software to see if there are significant changes.
 
 =head2 1.3 Document overview.
 
-This document releases Text::Scrub version 0.06
+This document releases Text::Scrub version 0.07
 providing a description of the inventory, installation
 instructions and other information necessary to
 utilize and track this release.
@@ -114,7 +118,7 @@ system file specification.
 
 This document releases the file 
 
- Text-Scrub-0.06.tar.gz
+ Text-Scrub-0.07.tar.gz
 
 found at the following repository(s):
 
@@ -158,6 +162,21 @@ disclaimer in the documentation and/or
 other materials provided with the
 distribution.
 
+=item 3
+
+Commercial installation of the binary or source
+must visually present to the installer 
+the above copyright notice,
+this list of conditions intact,
+that the original source is available
+at http://softwarediamonds.com
+and provide means
+for the installer to actively accept
+the list of conditions; 
+otherwise, a license fee must be paid to
+Softwareware Diamonds.
+
+
 =back
 
 SOFTWARE DIAMONDS, http://www.SoftwareDiamonds.com,
@@ -186,20 +205,20 @@ consists of the following files:
 
  file                                                         version date       comment
  ------------------------------------------------------------ ------- ---------- ------------------------
- lib/Docs/Site_SVD/Text_Scrub.pm                              0.06    2004/05/10 revised 0.05
- MANIFEST                                                     0.06    2004/05/10 generated, replaces 0.05
- Makefile.PL                                                  0.06    2004/05/10 generated, replaces 0.05
- README                                                       0.06    2004/05/10 generated, replaces 0.05
- lib/Text/Scrub.pm                                            1.13    2004/05/10 revised 1.12
- t/Text/Scrub.d                                               0.03    2004/05/10 revised 0.02
- t/Text/Scrub.pm                                              0.03    2004/05/10 revised 0.02
- t/Text/Scrub.t                                               0.1     2004/05/10 revised 0.09
- t/Text/File/Package.pm                                       1.17    2004/05/10 revised 1.16
- t/Text/Test/Tech.pm                                          1.23    2004/05/10 revised 1.22
- t/Text/Data/Secs2.pm                                         1.21    2004/05/10 revised 1.19
- t/Text/File/SmartNL.pm                                       1.15    2004/05/10 revised 1.14
- t/Text/Data/SecsPack.pm                                      0.06    2004/05/10 revised 0.04
- t/Text/Data/Startup.pm                                       0.05    2004/05/10 revised 0.04
+ lib/Docs/Site_SVD/Text_Scrub.pm                              0.07    2004/05/24 revised 0.06
+ MANIFEST                                                     0.07    2004/05/24 generated, replaces 0.06
+ Makefile.PL                                                  0.07    2004/05/24 generated, replaces 0.06
+ README                                                       0.07    2004/05/24 generated, replaces 0.06
+ lib/Text/Scrub.pm                                            1.16    2004/05/24 revised 1.13
+ t/Text/Scrub.d                                               0.03    2004/05/10 unchanged
+ t/Text/Scrub.pm                                              0.03    2004/05/10 unchanged
+ t/Text/Scrub.t                                               0.1     2004/05/10 unchanged
+ t/Text/File/Package.pm                                       1.18    2004/05/24 revised 1.17
+ t/Text/Test/Tech.pm                                          1.26    2004/05/24 revised 1.23
+ t/Text/Data/Secs2.pm                                         1.26    2004/05/24 revised 1.21
+ t/Text/File/SmartNL.pm                                       1.16    2004/05/24 revised 1.15
+ t/Text/Data/Str2Num.pm                                       0.08    2004/05/24 new
+ t/Text/Data/Startup.pm                                       0.07    2004/05/24 revised 0.05
 
 
 =head2 3.3 Changes
@@ -275,6 +294,15 @@ and deleting the test library File::TestPath program module.
 
 Added "SEE ALSO" section. Reworked QUALITY ASSURANCE and NOTES sections.
 
+=item Text-Scrub-0.06
+
+Cleaned up POD. Add C<scrub_architect> to C<OK_EXPORT>.
+
+=item Text-Scrub-0.07
+
+Added code to the C<scrub_file_line> subroutine to change double quotes
+around numbers to single quotes 
+
 =back
 
 =head2 3.4 Adaptation data.
@@ -313,13 +341,13 @@ Enter one of the following repositories in a web browser:
   http://www.softwarediamonds/packages/
   http://www.perl.com/CPAN/authors/id/S/SO/SOFTDIA/
 
-Right click on 'Text-Scrub-0.06.tar.gz' and download to a temporary
+Right click on 'Text-Scrub-0.07.tar.gz' and download to a temporary
 installation directory.
 Enter the following where $make is 'nmake' for microsoft
 windows; otherwise 'make'.
 
- gunzip Text-Scrub-0.06.tar.gz
- tar -xf Text-Scrub-0.06.tar
+ gunzip Text-Scrub-0.07.tar.gz
+ tar -xf Text-Scrub-0.07.tar
  perl Makefile.PL
  $make test
  $make install
@@ -410,15 +438,15 @@ __DATA__
 DISTNAME: Text-Scrub^
 REPOSITORY_DIR: packages^
 
-VERSION : 0.06^
+VERSION : 0.07^
 FREEZE: 1^
 PREVIOUS_DISTNAME:  ^
-PREVIOUS_RELEASE: 0.05^
-REVISION: E^
+PREVIOUS_RELEASE: 0.06^
+REVISION: F^
 
 AUTHOR  : SoftwareDiamonds.com E<lt>support@SoftwareDiamonds.comE<gt>^
 ABSTRACT: Utilites to wild card parts of a text file for comparisons.^
-TITLE   : Text::Scrub - Utilites to wild card parts of a text file for comparisons.^
+TITLE   : Docs::Site_SVD::Text_Scrub - Utilites to wild card parts of a text file for comparisons.^
 END_USER: General Public^
 COPYRIGHT: copyright © 2003 Software Diamonds^
 CLASSIFICATION: NONE^
@@ -444,7 +472,7 @@ lib/File/Package.pm => t/Text/File/Package.pm
 lib/Test/Tech.pm => t/Text/Test/Tech.pm
 lib/Data/Secs2.pm => t/Text/Data/Secs2.pm
 lib/File/SmartNL.pm => t/Text/File/SmartNL.pm
-lib/Data/SecsPack.pm => t/Text/Data/SecsPack.pm
+lib/Data/Str2Num.pm => t/Text/Data/Str2Num.pm
 lib/Data/Startup.pm => t/Text/Data/Startup.pm
 ^
 
@@ -526,6 +554,15 @@ and deleting the test library File::TestPath program module.
 
 Added "SEE ALSO" section. Reworked QUALITY ASSURANCE and NOTES sections.
 
+\=item Text-Scrub-0.06
+
+Cleaned up POD. Add C<scrub_architect> to C<OK_EXPORT>.
+
+\=item Text-Scrub-0.07
+
+Added code to the C<scrub_file_line> subroutine to change double quotes
+around numbers to single quotes 
+
 \=back
 
 ^
@@ -591,6 +628,21 @@ this list of conditions and the following
 disclaimer in the documentation and/or
 other materials provided with the
 distribution.
+
+\=item 3
+
+Commercial installation of the binary or source
+must visually present to the installer 
+the above copyright notice,
+this list of conditions intact,
+that the original source is available
+at http://softwarediamonds.com
+and provide means
+for the installer to actively accept
+the list of conditions; 
+otherwise, a license fee must be paid to
+Softwareware Diamonds.
+
 
 \=back
 
@@ -682,6 +734,12 @@ HTML:
 
 ^
 ~-~
+
+
+
+
+
+
 
 
 

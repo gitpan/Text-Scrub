@@ -5,13 +5,14 @@ SYNOPSIS
       #########
       # Subroutine Interface
       #
-      use Text::Scrub qw(scrub_date scrub_date_ticket scrub_date_version
-                         scrub_file_line scrub_probe scrub_test_file);
+      use Text::Scrub qw(scrub_date scrub_date_ticket scrub_date_version scrub_file_line 
+                         scrub_probe scrub_test_file);
 
+      $scrubbed_text = scrub_architect($script_text)
+      $scrubbed_text = scrub_file_line($script_text)
       $scrubbed_text = scrub_date($script_text)
       $scrubbed_text = scrub_date_ticket($script_text)
       $scrubbed_text = scrub_date_version($script_text)
-      $scrubbed_text = scrub_file_line($script_text)
       $scrubbed_text = scrub_probe($script_text)
       $scrubbed_text = scrub_test_file($script_text)
 
@@ -20,10 +21,11 @@ SYNOPSIS
       #
       use Text::Scrub
 
+      $scrubbed_text = Text::Scrub->scrub_architect($script_text)
+      $scrubbed_text = Text::Scrub->scrub_file_line($script_text)
       $scrubbed_text = Text::Scrub->scrub_date($script_text)
       $scrubbed_text = Text::Scrub->scrub_date_ticket($script_text)
       $scrubbed_text = Text::Scrub->scrub_date_version($script_text)
-      $scrubbed_text = Text::Scrub->scrub_file_line($script_text)
       $scrubbed_text = Text::Scrub->scrub_probe($script_text)
       $scrubbed_text = Text::Scrub->scrub_test_file($script_text)
 
@@ -38,14 +40,24 @@ DESCRIPTION
     performance of the "Test::STDmaker" and "ExtUtils::SVDmaker" packages
     has priority over backwards compatibility.
 
+  scrub_architect
+
+     $scrubbed_text = Test::STD::Scrub->scrub_architect($script_text)
+
+    When comparing the contents of two Perl program modules, the architect
+    should not be used in the comparision. The "scrub_architect" method will
+    replace the architect with a generic value. Applying the
+    "scrub_architect" to the contents of both files before the comparision
+    will eliminate the date and version as factors in the comparision.
+
   scrub_date_ticket
 
      $scrubbed_text = Test::STD::Scrub->scrub_date_ticket($script_text)
 
     When comparing the contents of email messages, the date and email ticket
-    should not be used in the comparision. The *scrub_date_ticket* method
+    should not be used in the comparision. The "scrub_date_ticket" method
     will replace the date and email ticket with a generic value. Applying
-    the *scrub_date_ticket* to the contents of both files before the
+    the "scrub_date_ticket" to the contents of both files before the
     comparision will eliminate the data and ticket as factors in the
     comparision.
 
@@ -54,9 +66,9 @@ DESCRIPTION
      $scrubbed_text = Test::STD::Scrub->scrub_date_version($script_text)
 
     When comparing the contents of two Perl program modules, the date and
-    version should not be used in the comparision. The *scrub_date_ticket*
+    version should not be used in the comparision. The *scrub_date_versiont*
     method will replace the date and version with a generic value. Applying
-    the *scrub_date_ticket* to the contents of both files before the
+    the "scrub_date_version" to the contents of both files before the
     comparision will eliminate the date and version as factors in the
     comparision.
 
@@ -65,9 +77,10 @@ DESCRIPTION
      $scrubbed_text = Test::STD::Scrub->scrub_file_line($script_text)
 
     When comparing the ouput of *Test* module the file and line number
-    should not be used in the comparision. The *scrub_file_line* method will
-    replace the file and line with a generic value. Applying the
-    *scrub_file_line* to the contents of both files before the comparision
+    should not be used in the comparision. The "scrub_file_line" method will
+    replace the file and line with a generic value. The subroutine changes
+    any double quotes around numbers to single quotes. Applying the
+    "scrub_file_line" to the contents of both files before the comparision
     will eliminate the file and line as factors in the comparision.
 
   scrub_test_file
@@ -75,9 +88,9 @@ DESCRIPTION
      $scrubbed_text = Test::STD::Scrub->scrub_test_file($script_text)
 
     When comparing the ouput of *Test:Harness* module the test file should
-    not be used in the comparision. The *scrub_test_file* method will
+    not be used in the comparision. The "scrub_test_file" method will
     replace the test file with a generic value. Applying the
-    *scrub_test_file* to the contents of both files before the comparision
+    "scrub_test_file" to the contents of both files before the comparision
     will eliminate the test file as a factor in the comparision.
 
 REQUIREMENTS
@@ -283,11 +296,12 @@ NOTES
         notice, this list of conditions and the following disclaimer in the
         documentation and/or other materials provided with the distribution.
 
-    3   The installation of the binary or source must visually present to
-        the installer the above copyright notice, this list of conditions
-        intact, that the original source is available at
+    3   Commercial installation of the binary or source must visually
+        present to the installer the above copyright notice, this list of
+        conditions intact, that the original source is available at
         http://softwarediamonds.com and provide means for the installer to
-        actively accept the list of conditions.
+        actively accept the list of conditions; otherwise, a license fee
+        must be paid to Softwareware Diamonds.
 
     SOFTWARE DIAMONDS, http://www.softwarediamonds.com, PROVIDES THIS
     SOFTWARE 'AS IS' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
@@ -306,18 +320,22 @@ SEE ALSO
     Test::STDmaker
     ExtUtils::SVDmaker
     L
+NAME
+    Docs::Site_SVD::Text_Scrub - Utilites to wild card parts of a text file
+    for comparisons.
+
 Title Page
      Software Version Description
 
      for
 
-     Text::Scrub - Utilites to wild card parts of a text file for comparisons.
+     Docs::Site_SVD::Text_Scrub - Utilites to wild card parts of a text file for comparisons.
 
-     Revision: E
+     Revision: F
 
-     Version: 0.06
+     Version: 0.07
 
-     Date: 2004/05/10
+     Date: 2004/05/24
 
      Prepared for: General Public 
 
@@ -354,7 +372,7 @@ Title Page
 
   1.3 Document overview.
 
-    This document releases Text::Scrub version 0.06 providing a description
+    This document releases Text::Scrub version 0.07 providing a description
     of the inventory, installation instructions and other information
     necessary to utilize and track this release.
 
@@ -366,7 +384,7 @@ Title Page
 
     This document releases the file
 
-     Text-Scrub-0.06.tar.gz
+     Text-Scrub-0.07.tar.gz
 
     found at the following repository(s):
 
@@ -396,6 +414,13 @@ Title Page
             disclaimer in the documentation and/or other materials provided
             with the distribution.
 
+        3   Commercial installation of the binary or source must visually
+            present to the installer the above copyright notice, this list
+            of conditions intact, that the original source is available at
+            http://softwarediamonds.com and provide means for the installer
+            to actively accept the list of conditions; otherwise, a license
+            fee must be paid to Softwareware Diamonds.
+
         SOFTWARE DIAMONDS, http://www.SoftwareDiamonds.com, PROVIDES THIS
         SOFTWARE 'AS IS' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING,
         BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND
@@ -416,20 +441,20 @@ Title Page
 
      file                                                         version date       comment
      ------------------------------------------------------------ ------- ---------- ------------------------
-     lib/Docs/Site_SVD/Text_Scrub.pm                              0.06    2004/05/10 revised 0.05
-     MANIFEST                                                     0.06    2004/05/10 generated, replaces 0.05
-     Makefile.PL                                                  0.06    2004/05/10 generated, replaces 0.05
-     README                                                       0.06    2004/05/10 generated, replaces 0.05
-     lib/Text/Scrub.pm                                            1.13    2004/05/10 revised 1.12
-     t/Text/Scrub.d                                               0.03    2004/05/10 revised 0.02
-     t/Text/Scrub.pm                                              0.03    2004/05/10 revised 0.02
-     t/Text/Scrub.t                                               0.1     2004/05/10 revised 0.09
-     t/Text/File/Package.pm                                       1.17    2004/05/10 revised 1.16
-     t/Text/Test/Tech.pm                                          1.23    2004/05/10 revised 1.22
-     t/Text/Data/Secs2.pm                                         1.21    2004/05/10 revised 1.19
-     t/Text/File/SmartNL.pm                                       1.15    2004/05/10 revised 1.14
-     t/Text/Data/SecsPack.pm                                      0.06    2004/05/10 revised 0.04
-     t/Text/Data/Startup.pm                                       0.05    2004/05/10 revised 0.04
+     lib/Docs/Site_SVD/Text_Scrub.pm                              0.07    2004/05/24 revised 0.06
+     MANIFEST                                                     0.07    2004/05/24 generated, replaces 0.06
+     Makefile.PL                                                  0.07    2004/05/24 generated, replaces 0.06
+     README                                                       0.07    2004/05/24 generated, replaces 0.06
+     lib/Text/Scrub.pm                                            1.16    2004/05/24 revised 1.13
+     t/Text/Scrub.d                                               0.03    2004/05/10 unchanged
+     t/Text/Scrub.pm                                              0.03    2004/05/10 unchanged
+     t/Text/Scrub.t                                               0.1     2004/05/10 unchanged
+     t/Text/File/Package.pm                                       1.18    2004/05/24 revised 1.17
+     t/Text/Test/Tech.pm                                          1.26    2004/05/24 revised 1.23
+     t/Text/Data/Secs2.pm                                         1.26    2004/05/24 revised 1.21
+     t/Text/File/SmartNL.pm                                       1.16    2004/05/24 revised 1.15
+     t/Text/Data/Str2Num.pm                                       0.08    2004/05/24 new
+     t/Text/Data/Startup.pm                                       0.07    2004/05/24 revised 0.05
 
   3.3 Changes
 
@@ -490,6 +515,13 @@ Title Page
         Added "SEE ALSO" section. Reworked QUALITY ASSURANCE and NOTES
         sections.
 
+    Text-Scrub-0.06
+        Cleaned up POD. Add "scrub_architect" to "OK_EXPORT".
+
+    Text-Scrub-0.07
+        Added code to the "scrub_file_line" subroutine to change double
+        quotes around numbers to single quotes
+
   3.4 Adaptation data.
 
     This installation requires that the installation site has the Perl
@@ -522,12 +554,12 @@ Title Page
           http://www.softwarediamonds/packages/
           http://www.perl.com/CPAN/authors/id/S/SO/SOFTDIA/
 
-        Right click on 'Text-Scrub-0.06.tar.gz' and download to a temporary
+        Right click on 'Text-Scrub-0.07.tar.gz' and download to a temporary
         installation directory. Enter the following where $make is 'nmake'
         for microsoft windows; otherwise 'make'.
 
-         gunzip Text-Scrub-0.06.tar.gz
-         tar -xf Text-Scrub-0.06.tar
+         gunzip Text-Scrub-0.07.tar.gz
+         tar -xf Text-Scrub-0.07.tar
          perl Makefile.PL
          $make test
          $make install

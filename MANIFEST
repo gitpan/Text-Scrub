@@ -10,5 +10,5 @@ t/Text/File/Package.pm
 t/Text/Test/Tech.pm
 t/Text/Data/Secs2.pm
 t/Text/File/SmartNL.pm
-t/Text/Data/SecsPack.pm
+t/Text/Data/Str2Num.pm
 t/Text/Data/Startup.pm

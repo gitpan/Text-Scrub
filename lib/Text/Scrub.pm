@@ -10,14 +10,14 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE);
-$VERSION = '1.13';
-$DATE = '2004/05/10';
+$VERSION = '1.16';
+$DATE = '2004/05/24';
 $FILE = __FILE__;
 
 use vars qw(@ISA @EXPORT_OK);
 require Exporter;
 @ISA= qw(Exporter);
-@EXPORT_OK = qw(scrub_date scrub_date_ticket scrub_date_version
+@EXPORT_OK = qw(scrub_architect scrub_date scrub_date_ticket scrub_date_version 
                 scrub_file_line scrub_probe scrub_test_file);
 
 use SelfLoader;
@@ -28,7 +28,7 @@ __DATA__
 # Blank out the Verion, Date for comparision
 #
 #
-sub scrub_file_line
+sub scrub_architect
 {
     ######
     # This subroutine uses no object data; therefore,
@@ -43,35 +43,11 @@ sub scrub_file_line
     ######
     # Blank out version and date for comparasion
     #
-    $text =~ s/\(.*?at line \d+/(xxxx.t at line 000/ig;
+    $text =~ s/ARCHITECTURE NAME\s*=\s*['"].*?['"]/ARCHITECTURE NAME="Perl"/ig;      
     $text
 
 }
 
-
-#######
-# Blank out the Verion, Date for comparision
-#
-#
-sub scrub_test_file
-{
-    ######
-    # This subroutine uses no object data; therefore,
-    # drop any class or object.
-    #
-    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
-
-    my ($text) = @_;
-
-    return $text unless $text;
-
-    ######
-    # Blank out version and date for comparasion
-    #
-    $text =~ s/Running Tests.*?1\.\./Running Tests xxx.t 1../sig;
-    $text
-
-}
 
 #####
 # 
@@ -119,29 +95,6 @@ sub scrub_date_version
 }
 
 
-#######
-# Blank out the Verion, Date for comparision
-#
-#
-sub scrub_architect
-{
-    ######
-    # This subroutine uses no object data; therefore,
-    # drop any class or object.
-    #
-    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
-
-    my ($text) = @_;
-
-    return $text unless $text;
-
-    ######
-    # Blank out version and date for comparasion
-    #
-    $text =~ s/ARCHITECTURE NAME\s*=\s*['"].*?['"]/ARCHITECTURE NAME="Perl"/ig;      
-    $text
-
-}
 
 #####
 # Date changes between runs so cannot have
@@ -181,6 +134,37 @@ sub scrub_date_ticket
 }
 
 
+#######
+# Blank out the Verion, Date for comparision
+#
+#
+sub scrub_file_line
+{
+    ######
+    # This subroutine uses no object data; therefore,
+    # drop any class or object.
+    #
+    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+
+    my ($text) = @_;
+
+    return $text unless $text;
+
+    ######
+    # Blank out version and date for comparasion
+    #
+    $text =~ s/\(.*?at line \d+/(xxxx.t at line 000/ig;
+
+    ######
+    # Most Perls return single quotes around numbers; however,
+    # darwin-thread-multi-2level 7.0, and probably others
+    # return double quotes
+    #
+    $text =~ s/\"(\d+)\"/'$1'/g;
+
+    $text
+
+}
 
 #####
 #
@@ -198,6 +182,29 @@ sub scrub_probe
     $text
 }
 
+#######
+# Blank out the Verion, Date for comparision
+#
+#
+sub scrub_test_file
+{
+    ######
+    # This subroutine uses no object data; therefore,
+    # drop any class or object.
+    #
+    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+
+    my ($text) = @_;
+
+    return $text unless $text;
+
+    ######
+    # Blank out version and date for comparasion
+    #
+    $text =~ s/Running Tests.*?1\.\./Running Tests xxx.t 1../sig;
+    $text
+
+}
 
 
 1
@@ -215,13 +222,14 @@ Text::Scrub - used to wild card out text used for comparison
   #########
   # Subroutine Interface
   #
-  use Text::Scrub qw(scrub_date scrub_date_ticket scrub_date_version
-                     scrub_file_line scrub_probe scrub_test_file);
+  use Text::Scrub qw(scrub_date scrub_date_ticket scrub_date_version scrub_file_line 
+                     scrub_probe scrub_test_file);
 
+  $scrubbed_text = scrub_architect($script_text)
+  $scrubbed_text = scrub_file_line($script_text)
   $scrubbed_text = scrub_date($script_text)
   $scrubbed_text = scrub_date_ticket($script_text)
   $scrubbed_text = scrub_date_version($script_text)
-  $scrubbed_text = scrub_file_line($script_text)
   $scrubbed_text = scrub_probe($script_text)
   $scrubbed_text = scrub_test_file($script_text)
 
@@ -230,10 +238,11 @@ Text::Scrub - used to wild card out text used for comparison
   #
   use Text::Scrub
 
+  $scrubbed_text = Text::Scrub->scrub_architect($script_text)
+  $scrubbed_text = Text::Scrub->scrub_file_line($script_text)
   $scrubbed_text = Text::Scrub->scrub_date($script_text)
   $scrubbed_text = Text::Scrub->scrub_date_ticket($script_text)
   $scrubbed_text = Text::Scrub->scrub_date_version($script_text)
-  $scrubbed_text = Text::Scrub->scrub_file_line($script_text)
   $scrubbed_text = Text::Scrub->scrub_probe($script_text)
   $scrubbed_text = Text::Scrub->scrub_test_file($script_text)
 
@@ -254,6 +263,20 @@ L<C<Test::STDmaker>|Test::STDmaker> and
 L<C<ExtUtils::SVDmaker>|ExtUtils::SVDmaker> packages has
 priority over backwards compatibility.
 
+=head2 scrub_architect
+
+ $scrubbed_text = Test::STD::Scrub->scrub_architect($script_text)
+
+When comparing the contents of two Perl program modules, 
+the architect should not be used 
+in the comparision. 
+The C<scrub_architect> method will replace
+the architect with a generic value.
+Applying the C<scrub_architect> to the contents
+of both files before the comparision will 
+eliminate the date and version as factors in
+the comparision.
+
 =head2 scrub_date_ticket
 
  $scrubbed_text = Test::STD::Scrub->scrub_date_ticket($script_text)
@@ -261,9 +284,9 @@ priority over backwards compatibility.
 When comparing the contents of email messages, 
 the date and email ticket should not be used 
 in the comparision. 
-The I<scrub_date_ticket> method will replace
+The C<scrub_date_ticket> method will replace
 the date and email ticket with a generic value.
-Applying the I<scrub_date_ticket> to the contents
+Applying the C<scrub_date_ticket> to the contents
 of both files before the comparision will 
 eliminate the data and ticket as factors in
 the comparision.
@@ -275,9 +298,9 @@ the comparision.
 When comparing the contents of two Perl program modules, 
 the date and version should not be used 
 in the comparision. 
-The I<scrub_date_ticket> method will replace
+The I<scrub_date_versiont> method will replace
 the date and version with a generic value.
-Applying the I<scrub_date_ticket> to the contents
+Applying the C<scrub_date_version> to the contents
 of both files before the comparision will 
 eliminate the date and version as factors in
 the comparision.
@@ -289,9 +312,11 @@ the comparision.
 When comparing the ouput of I<Test> module
 the file and line number should not be used 
 in the comparision. 
-The I<scrub_file_line> method will replace
+The C<scrub_file_line> method will replace
 the file and line with a generic value.
-Applying the I<scrub_file_line> to the contents
+The subroutine changes any double quotes around
+numbers to single quotes.
+Applying the C<scrub_file_line> to the contents
 of both files before the comparision will 
 eliminate the file and line as factors in
 the comparision.
@@ -303,9 +328,9 @@ the comparision.
 When comparing the ouput of I<Test:Harness> module
 the test file should not be used 
 in the comparision. 
-The I<scrub_test_file> method will replace
+The C<scrub_test_file> method will replace
 the test file with a generic value.
-Applying the I<scrub_test_file> to the contents
+Applying the C<scrub_test_file> to the contents
 of both files before the comparision will 
 eliminate the test file as a factor in
 the comparision.
@@ -537,7 +562,7 @@ distribution.
 
 =item 3
 
-The installation of the binary or source
+Commercial installation of the binary or source
 must visually present to the installer 
 the above copyright notice,
 this list of conditions intact,
@@ -545,7 +570,9 @@ that the original source is available
 at http://softwarediamonds.com
 and provide means
 for the installer to actively accept
-the list of conditions.
+the list of conditions; 
+otherwise, a license fee must be paid to
+Softwareware Diamonds.
 
 =back
 
