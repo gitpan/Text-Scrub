@@ -7,8 +7,8 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE);
-$VERSION = '0.02';   # automatically generated file
-$DATE = '2004/05/04';
+$VERSION = '0.03';   # automatically generated file
+$DATE = '2004/05/10';
 
 
 ##### Demonstration Script ####
@@ -297,6 +297,21 @@ EOF
 
 demo( "\$uut\-\>scrub_probe\(\$text\)", # typed in command           
       $uut->scrub_probe($text)); # execution
+
+
+print << "EOF";
+
+ ##################
+ #  scrub_architect
+ # 
+ 
+EOF
+
+demo( "\$text\ \=\ \'ARCHITECTURE\ NAME\=\"MSWin32\-x86\-multi\-thread\-5\.5\"\'"); # typed in command           
+      $text = 'ARCHITECTURE NAME="MSWin32-x86-multi-thread-5.5"'; # execution
+
+demo( "\$uut\-\>scrub_architect\(\$text\)", # typed in command           
+      $uut->scrub_architect($text)); # execution
 
 
 demo( "unlink\ \'actual\.txt\'"); # typed in command           

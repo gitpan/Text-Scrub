@@ -10,26 +10,26 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.05';
-$DATE = '2004/05/04';
+$VERSION = '0.06';
+$DATE = '2004/05/10';
 $FILE = __FILE__;
 
 use vars qw(%INVENTORY);
 %INVENTORY = (
-    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.05 2004/05/04), 'revised 0.04'],
-    'MANIFEST' => [qw(0.05 2004/05/04), 'generated, replaces 0.04'],
-    'Makefile.PL' => [qw(0.05 2004/05/04), 'generated, replaces 0.04'],
-    'README' => [qw(0.05 2004/05/04), 'generated, replaces 0.04'],
-    'lib/Text/Scrub.pm' => [qw(1.12 2004/05/04), 'revised 1.11'],
-    't/Text/Scrub.d' => [qw(0.02 2004/05/04), 'revised 0.01'],
-    't/Text/Scrub.pm' => [qw(0.02 2004/05/04), 'revised 0.01'],
-    't/Text/Scrub.t' => [qw(0.09 2004/05/04), 'revised 0.08'],
-    't/Text/File/Package.pm' => [qw(1.16 2004/05/04), 'new'],
-    't/Text/Test/Tech.pm' => [qw(1.22 2004/05/04), 'new'],
-    't/Text/Data/Secs2.pm' => [qw(1.19 2004/05/04), 'new'],
-    't/Text/File/SmartNL.pm' => [qw(1.14 2004/05/04), 'new'],
-    't/Text/Data/SecsPack.pm' => [qw(0.04 2004/05/04), 'new'],
-    't/Text/Data/Startup.pm' => [qw(0.04 2004/05/04), 'new'],
+    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.06 2004/05/10), 'revised 0.05'],
+    'MANIFEST' => [qw(0.06 2004/05/10), 'generated, replaces 0.05'],
+    'Makefile.PL' => [qw(0.06 2004/05/10), 'generated, replaces 0.05'],
+    'README' => [qw(0.06 2004/05/10), 'generated, replaces 0.05'],
+    'lib/Text/Scrub.pm' => [qw(1.13 2004/05/10), 'revised 1.12'],
+    't/Text/Scrub.d' => [qw(0.03 2004/05/10), 'revised 0.02'],
+    't/Text/Scrub.pm' => [qw(0.03 2004/05/10), 'revised 0.02'],
+    't/Text/Scrub.t' => [qw(0.1 2004/05/10), 'revised 0.09'],
+    't/Text/File/Package.pm' => [qw(1.17 2004/05/10), 'revised 1.16'],
+    't/Text/Test/Tech.pm' => [qw(1.23 2004/05/10), 'revised 1.22'],
+    't/Text/Data/Secs2.pm' => [qw(1.21 2004/05/10), 'revised 1.19'],
+    't/Text/File/SmartNL.pm' => [qw(1.15 2004/05/10), 'revised 1.14'],
+    't/Text/Data/SecsPack.pm' => [qw(0.06 2004/05/10), 'revised 0.04'],
+    't/Text/Data/Startup.pm' => [qw(0.05 2004/05/10), 'revised 0.04'],
 
 );
 
@@ -56,11 +56,11 @@ use vars qw(%INVENTORY);
 
  Text::Scrub - Utilites to wild card parts of a text file for comparisons.
 
- Revision: B
+ Revision: E
 
- Version: 0.05
+ Version: 0.06
 
- Date: 2004/05/04
+ Date: 2004/05/10
 
  Prepared for: General Public 
 
@@ -99,7 +99,7 @@ pieces of software to see if there are significant changes.
 
 =head2 1.3 Document overview.
 
-This document releases Text::Scrub version 0.05
+This document releases Text::Scrub version 0.06
 providing a description of the inventory, installation
 instructions and other information necessary to
 utilize and track this release.
@@ -114,7 +114,7 @@ system file specification.
 
 This document releases the file 
 
- Text-Scrub-0.05.tar.gz
+ Text-Scrub-0.06.tar.gz
 
 found at the following repository(s):
 
@@ -186,20 +186,20 @@ consists of the following files:
 
  file                                                         version date       comment
  ------------------------------------------------------------ ------- ---------- ------------------------
- lib/Docs/Site_SVD/Text_Scrub.pm                              0.05    2004/05/04 revised 0.04
- MANIFEST                                                     0.05    2004/05/04 generated, replaces 0.04
- Makefile.PL                                                  0.05    2004/05/04 generated, replaces 0.04
- README                                                       0.05    2004/05/04 generated, replaces 0.04
- lib/Text/Scrub.pm                                            1.12    2004/05/04 revised 1.11
- t/Text/Scrub.d                                               0.02    2004/05/04 revised 0.01
- t/Text/Scrub.pm                                              0.02    2004/05/04 revised 0.01
- t/Text/Scrub.t                                               0.09    2004/05/04 revised 0.08
- t/Text/File/Package.pm                                       1.16    2004/05/04 new
- t/Text/Test/Tech.pm                                          1.22    2004/05/04 new
- t/Text/Data/Secs2.pm                                         1.19    2004/05/04 new
- t/Text/File/SmartNL.pm                                       1.14    2004/05/04 new
- t/Text/Data/SecsPack.pm                                      0.04    2004/05/04 new
- t/Text/Data/Startup.pm                                       0.04    2004/05/04 new
+ lib/Docs/Site_SVD/Text_Scrub.pm                              0.06    2004/05/10 revised 0.05
+ MANIFEST                                                     0.06    2004/05/10 generated, replaces 0.05
+ Makefile.PL                                                  0.06    2004/05/10 generated, replaces 0.05
+ README                                                       0.06    2004/05/10 generated, replaces 0.05
+ lib/Text/Scrub.pm                                            1.13    2004/05/10 revised 1.12
+ t/Text/Scrub.d                                               0.03    2004/05/10 revised 0.02
+ t/Text/Scrub.pm                                              0.03    2004/05/10 revised 0.02
+ t/Text/Scrub.t                                               0.1     2004/05/10 revised 0.09
+ t/Text/File/Package.pm                                       1.17    2004/05/10 revised 1.16
+ t/Text/Test/Tech.pm                                          1.23    2004/05/10 revised 1.22
+ t/Text/Data/Secs2.pm                                         1.21    2004/05/10 revised 1.19
+ t/Text/File/SmartNL.pm                                       1.15    2004/05/10 revised 1.14
+ t/Text/Data/SecsPack.pm                                      0.06    2004/05/10 revised 0.04
+ t/Text/Data/Startup.pm                                       0.05    2004/05/10 revised 0.04
 
 
 =head2 3.3 Changes
@@ -313,13 +313,13 @@ Enter one of the following repositories in a web browser:
   http://www.softwarediamonds/packages/
   http://www.perl.com/CPAN/authors/id/S/SO/SOFTDIA/
 
-Right click on 'Text-Scrub-0.05.tar.gz' and download to a temporary
+Right click on 'Text-Scrub-0.06.tar.gz' and download to a temporary
 installation directory.
 Enter the following where $make is 'nmake' for microsoft
 windows; otherwise 'make'.
 
- gunzip Text-Scrub-0.05.tar.gz
- tar -xf Text-Scrub-0.05.tar
+ gunzip Text-Scrub-0.06.tar.gz
+ tar -xf Text-Scrub-0.06.tar
  perl Makefile.PL
  $make test
  $make install
@@ -410,11 +410,11 @@ __DATA__
 DISTNAME: Text-Scrub^
 REPOSITORY_DIR: packages^
 
-VERSION : 0.05^
+VERSION : 0.06^
 FREEZE: 1^
 PREVIOUS_DISTNAME:  ^
-PREVIOUS_RELEASE: 0.04^
-REVISION: B^
+PREVIOUS_RELEASE: 0.05^
+REVISION: E^
 
 AUTHOR  : SoftwareDiamonds.com E<lt>support@SoftwareDiamonds.comE<gt>^
 ABSTRACT: Utilites to wild card parts of a text file for comparisons.^
@@ -682,5 +682,9 @@ HTML:
 
 ^
 ~-~
+
+
+
+
 
 

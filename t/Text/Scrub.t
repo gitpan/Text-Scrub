@@ -7,8 +7,8 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE);
-$VERSION = '0.09';   # automatically generated file
-$DATE = '2004/05/04';
+$VERSION = '0.1';   # automatically generated file
+$DATE = '2004/05/10';
 $FILE = __FILE__;
 
 
@@ -79,7 +79,7 @@ BEGIN {
    #
    require Test::Tech;
    Test::Tech->import( qw(finish is_skip ok plan skip skip_tests tech_config) );
-   plan(tests => 8);
+   plan(tests => 9);
 
 }
 
@@ -262,6 +262,16 @@ ok(  $uut->scrub_probe($text), # actual results
      " scrub_probe");
 
 #  ok:  8
+
+   # Perl code from C:
+$text = 'ARCHITECTURE NAME="MSWin32-x86-multi-thread-5.5"';
+
+ok(  $uut->scrub_architect($text), # actual results
+     'ARCHITECTURE NAME="Perl"', # expected results
+     "",
+     " scrub_architect");
+
+#  ok:  9
 
    # Perl code from C:
 unlink 'actual.txt';

@@ -227,6 +227,16 @@ DEMONSTRATION
      #ok 1
      #'
      #
+
+     ##################
+     #  scrub_architect
+     # 
+
+     $text = 'ARCHITECTURE NAME="MSWin32-x86-multi-thread-5.5"'
+     $uut->scrub_architect($text)
+
+     # 'ARCHITECTURE NAME="Perl"'
+     #
      unlink 'actual.txt'
 
 QUALITY ASSURANCE
@@ -273,6 +283,12 @@ NOTES
         notice, this list of conditions and the following disclaimer in the
         documentation and/or other materials provided with the distribution.
 
+    3   The installation of the binary or source must visually present to
+        the installer the above copyright notice, this list of conditions
+        intact, that the original source is available at
+        http://softwarediamonds.com and provide means for the installer to
+        actively accept the list of conditions.
+
     SOFTWARE DIAMONDS, http://www.softwarediamonds.com, PROVIDES THIS
     SOFTWARE 'AS IS' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT
     NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
@@ -297,11 +313,11 @@ Title Page
 
      Text::Scrub - Utilites to wild card parts of a text file for comparisons.
 
-     Revision: B
+     Revision: E
 
-     Version: 0.05
+     Version: 0.06
 
-     Date: 2004/05/04
+     Date: 2004/05/10
 
      Prepared for: General Public 
 
@@ -338,7 +354,7 @@ Title Page
 
   1.3 Document overview.
 
-    This document releases Text::Scrub version 0.05 providing a description
+    This document releases Text::Scrub version 0.06 providing a description
     of the inventory, installation instructions and other information
     necessary to utilize and track this release.
 
@@ -350,7 +366,7 @@ Title Page
 
     This document releases the file
 
-     Text-Scrub-0.05.tar.gz
+     Text-Scrub-0.06.tar.gz
 
     found at the following repository(s):
 
@@ -400,20 +416,20 @@ Title Page
 
      file                                                         version date       comment
      ------------------------------------------------------------ ------- ---------- ------------------------
-     lib/Docs/Site_SVD/Text_Scrub.pm                              0.05    2004/05/04 revised 0.04
-     MANIFEST                                                     0.05    2004/05/04 generated, replaces 0.04
-     Makefile.PL                                                  0.05    2004/05/04 generated, replaces 0.04
-     README                                                       0.05    2004/05/04 generated, replaces 0.04
-     lib/Text/Scrub.pm                                            1.12    2004/05/04 revised 1.11
-     t/Text/Scrub.d                                               0.02    2004/05/04 revised 0.01
-     t/Text/Scrub.pm                                              0.02    2004/05/04 revised 0.01
-     t/Text/Scrub.t                                               0.09    2004/05/04 revised 0.08
-     t/Text/File/Package.pm                                       1.16    2004/05/04 new
-     t/Text/Test/Tech.pm                                          1.22    2004/05/04 new
-     t/Text/Data/Secs2.pm                                         1.19    2004/05/04 new
-     t/Text/File/SmartNL.pm                                       1.14    2004/05/04 new
-     t/Text/Data/SecsPack.pm                                      0.04    2004/05/04 new
-     t/Text/Data/Startup.pm                                       0.04    2004/05/04 new
+     lib/Docs/Site_SVD/Text_Scrub.pm                              0.06    2004/05/10 revised 0.05
+     MANIFEST                                                     0.06    2004/05/10 generated, replaces 0.05
+     Makefile.PL                                                  0.06    2004/05/10 generated, replaces 0.05
+     README                                                       0.06    2004/05/10 generated, replaces 0.05
+     lib/Text/Scrub.pm                                            1.13    2004/05/10 revised 1.12
+     t/Text/Scrub.d                                               0.03    2004/05/10 revised 0.02
+     t/Text/Scrub.pm                                              0.03    2004/05/10 revised 0.02
+     t/Text/Scrub.t                                               0.1     2004/05/10 revised 0.09
+     t/Text/File/Package.pm                                       1.17    2004/05/10 revised 1.16
+     t/Text/Test/Tech.pm                                          1.23    2004/05/10 revised 1.22
+     t/Text/Data/Secs2.pm                                         1.21    2004/05/10 revised 1.19
+     t/Text/File/SmartNL.pm                                       1.15    2004/05/10 revised 1.14
+     t/Text/Data/SecsPack.pm                                      0.06    2004/05/10 revised 0.04
+     t/Text/Data/Startup.pm                                       0.05    2004/05/10 revised 0.04
 
   3.3 Changes
 
@@ -506,12 +522,12 @@ Title Page
           http://www.softwarediamonds/packages/
           http://www.perl.com/CPAN/authors/id/S/SO/SOFTDIA/
 
-        Right click on 'Text-Scrub-0.05.tar.gz' and download to a temporary
+        Right click on 'Text-Scrub-0.06.tar.gz' and download to a temporary
         installation directory. Enter the following where $make is 'nmake'
         for microsoft windows; otherwise 'make'.
 
-         gunzip Text-Scrub-0.05.tar.gz
-         tar -xf Text-Scrub-0.05.tar
+         gunzip Text-Scrub-0.06.tar.gz
+         tar -xf Text-Scrub-0.06.tar
          perl Makefile.PL
          $make test
          $make install

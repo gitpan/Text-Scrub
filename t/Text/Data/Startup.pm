@@ -12,8 +12,8 @@ use warnings::register;
 use attributes;
 
 use vars qw( $VERSION $DATE $FILE);
-$VERSION = '0.04';
-$DATE = '2004/05/04';
+$VERSION = '0.05';
+$DATE = '2004/05/10';
 $FILE = __FILE__;
 
 #######
@@ -601,6 +601,18 @@ this list of conditions and the following
 disclaimer in the documentation and/or
 other materials provided with the
 distribution.
+
+=item 3
+
+The installation of the binary or source
+must visually present to the installer 
+the above copyright notice,
+this list of conditions intact,
+that the original source is available
+at http://softwarediamonds.com
+and provide means
+for the installer to actively accept
+the list of conditions.
 
 =back
 

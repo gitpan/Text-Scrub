@@ -15,8 +15,8 @@ use Math::BigFloat 1.40;
 use Data::Startup;
 
 use vars qw( $VERSION $DATE $FILE);
-$VERSION = '0.04';
-$DATE = '2004/05/04';
+$VERSION = '0.06';
+$DATE = '2004/05/10';
 $FILE = __FILE__;
 
 use vars qw(@ISA @EXPORT_OK);
@@ -54,11 +54,11 @@ sub new
 
 }
 
-use SelfLoader;
+# use SelfLoader;
 
-1
+# 1
 
-__DATA__
+# __DATA__
 
 
 ###########
@@ -859,10 +859,10 @@ sub str2float
      my @floats = ();
      my $early_exit unless wantarray;
      my ($sign,$integer,$fraction,$exponent);
-     foreach $_ (@strs) {
+     foreach (@strs) {
          while ( length($_) ) {
 
-             ($sign, $integer,$fraction,$exponent) = ('','','',0);
+             ($sign, $integer,$fraction,$exponent) = ('',undef,undef,undef);
 
              #######
              # Parse the integer part
@@ -884,8 +884,11 @@ sub str2float
              # Parse the exponent part
              $exponent = $1 . $2 if $_ =~ s/^E(-?)([0-9]+)\s*[,;\n]?//;
 
-             goto LAST unless $integer || $fraction || $exponent;
+             goto LAST unless defined($integer) || defined($fraction) || defined($exponent);
 
+             $integer = '' unless defined($integer);
+             $fraction = '' unless defined($fraction);
+             $exponent = 0 unless defined($exponent);
 
              if($options->{ascii_float} ) {
                  $integer .= '.' . $fraction if( $fraction);
@@ -1367,7 +1370,7 @@ get out the door.
 
 The L<Data::SecsPack|Data::SecsPack> suroutines 
 packs and unpacks numbers in accordance with 
-L<SEMI|http://http://www.semiconductor-intl.org> E5-94, 
+L<SEMI|http:E<sol>E<sol>www.semi.org> E5-94, 
 Semiconductor Equipment Communications Standard 2 (SECS-II),
 avaiable from
  
@@ -1376,8 +1379,7 @@ avaiable from
  Mountain View, CA 94043-4080 USA
  (415) 964-5111
  Easylink: 62819945
- http://www.semiconductor-intl.org
- http://www.reed-electronics.com/semiconductor/
+ http://www.semi.org
  
 The format of SEMI E5-94 numbers are established
 by below Table 1. 
@@ -2050,7 +2052,7 @@ in C<@strings> and the array of floats C<@floats>.
 For the C<ascii_float> option, the members of the C<@floats> are scalar
 strings of the float numbers; otherwise, the members are a reference
 to an array of C<[$decimal_magnitude, $decimal_exponent]> where the decimal
-point is set so that there is one decimal digit to the right of the decimal
+point is set so that there is one decimal digit to the left of the decimal
 point for $decimal_magnitude.
 
 In a scalar context, it parse out any type of $number in the leading C<$string>.
@@ -2495,12 +2497,11 @@ follow on the next lines as comments. For example,
 Running the test script C<SecsPack.t>
 and C<SecsPackStress.t> verifies
 the requirements for this module.
-
 The C<tmake.pl> cover script for C<Test::STDmaker|Test::STDmaker>
 automatically generated the
 C<SecsPack.t> and C<SecsPackStress.t> 
-test scripts,C<SecsPack.d> and C<SecsPackStress.d> demo scripts,
-and C<t::Data::SecsPack> and C<t::Data::SecsPackStress> STD program module PODs,
+test scripts, the C<SecsPack.d> and C<SecsPackStress.d> demo scripts,
+and the C<t::Data::SecsPack> and C<t::Data::SecsPackStress> STD program module PODs,
 from the C<t::Data::SecsPack> and C<t::Data::SecsPackStress> program module's content.
 The C<t::Data::SecsPack> and C<t::Data::SecsPackStress> program modules are
 in the distribution file
@@ -2555,6 +2556,18 @@ disclaimer in the documentation and/or
 other materials provided with the
 distribution.
 
+=item 3
+
+The installation of the binary or source
+must visually present to the installer 
+the above copyright notice,
+this list of conditions intact,
+that the original source is available
+at http://softwarediamonds.com
+and provide means
+for the installer to actively accept
+the list of conditions.
+
 =back
 
 SOFTWARE DIAMONDS, http://www.softwarediamonds.com,
@@ -2578,11 +2591,13 @@ ANY WAY OUT OF THE POSSIBILITY OF SUCH DAMAGE.
 
 =over 4
 
+=item L<SEMI|http:E<sol>E<sol>www.semi.org>
+
 =item L<Math::BigInt|Math::BigInt>
 
 =item L<Math::BigFloat|Math::BigFloat>
 
-=item L<Data::Secs2|Data::Sec2>
+=item L<Data::Secs2|Data::Secs2>
 
 =item L<Docs::Site_SVD::Data_SecsPack|Docs::Site_SVD::Data_SecsPack>
 

@@ -9,11 +9,9 @@ use strict;
 use warnings;
 use warnings::register;
 
-use SelfLoader;
-
 use vars qw($VERSION $DATE $FILE);
-$VERSION = '1.12';
-$DATE = '2004/05/04';
+$VERSION = '1.13';
+$DATE = '2004/05/10';
 $FILE = __FILE__;
 
 use vars qw(@ISA @EXPORT_OK);
@@ -22,8 +20,8 @@ require Exporter;
 @EXPORT_OK = qw(scrub_date scrub_date_ticket scrub_date_version
                 scrub_file_line scrub_probe scrub_test_file);
 
+use SelfLoader;
 1
-
 __DATA__
 
 #######
@@ -116,6 +114,31 @@ sub scrub_date_version
     $text =~ s/\$VERSION\s*=\s*['"].*?['"]/\$VERSION = '0.00'/ig;      
     $text =~ s/\$DATE\s*=\s*['"].*?['"]/\$DATE = 'Feb 6, 1969'/ig;
     $text =~ s/DATE:\s+.*?\n/\$DATE: Feb 6, 1969\n/ig;
+    $text
+
+}
+
+
+#######
+# Blank out the Verion, Date for comparision
+#
+#
+sub scrub_architect
+{
+    ######
+    # This subroutine uses no object data; therefore,
+    # drop any class or object.
+    #
+    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+
+    my ($text) = @_;
+
+    return $text unless $text;
+
+    ######
+    # Blank out version and date for comparasion
+    #
+    $text =~ s/ARCHITECTURE NAME\s*=\s*['"].*?['"]/ARCHITECTURE NAME="Perl"/ig;      
     $text
 
 }
@@ -436,6 +459,16 @@ follow on the next lines as comments. For example,
  #ok 1
  #'
  #
+
+ ##################
+ #  scrub_architect
+ # 
+
+ $text = 'ARCHITECTURE NAME="MSWin32-x86-multi-thread-5.5"'
+ $uut->scrub_architect($text)
+
+ # 'ARCHITECTURE NAME="Perl"'
+ #
  unlink 'actual.txt'
 
 =head1 QUALITY ASSURANCE
@@ -501,6 +534,18 @@ this list of conditions and the following
 disclaimer in the documentation and/or
 other materials provided with the
 distribution.
+
+=item 3
+
+The installation of the binary or source
+must visually present to the installer 
+the above copyright notice,
+this list of conditions intact,
+that the original source is available
+at http://softwarediamonds.com
+and provide means
+for the installer to actively accept
+the list of conditions.
 
 =back
 

@@ -10,8 +10,8 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.02';
-$DATE = '2004/05/04';
+$VERSION = '0.03';
+$DATE = '2004/05/10';
 $FILE = __FILE__;
 
 ########
@@ -40,7 +40,7 @@ $FILE = __FILE__;
 
  Version: 
 
- Date: 2004/05/04
+ Date: 2004/05/10
 
  Prepared for: General Public 
 
@@ -80,7 +80,7 @@ L<STD FormDB Test Description Fields|Test::STDmaker/STD FormDB Test Description 
 
 =head2 Test Plan
 
- T: 8^
+ T: 9^
 
 =head2 ok: 1
 
@@ -198,6 +198,14 @@ L<STD FormDB Test Description Fields|Test::STDmaker/STD FormDB Test Description 
   A: $uut->scrub_probe($text)^
   E: $expected_text^
  ok: 8^
+
+=head2 ok: 9
+
+  N:  scrub_architect^
+  C: $text = 'ARCHITECTURE NAME="MSWin32-x86-multi-thread-5.5"'^
+  A: $uut->scrub_architect($text)^
+  E: 'ARCHITECTURE NAME="Perl"'^
+ ok: 9^
 
 
 
@@ -317,7 +325,7 @@ Demo: Scrub.d^
 Verify: Scrub.t^
 
 
- T: 8^
+ T: 9^
 
 
  C:
@@ -429,6 +437,12 @@ EOF
  A: $uut->scrub_probe($text)^
  E: $expected_text^
 ok: 8^
+
+ N:  scrub_architect^
+ C: $text = 'ARCHITECTURE NAME="MSWin32-x86-multi-thread-5.5"'^
+ A: $uut->scrub_architect($text)^
+ E: 'ARCHITECTURE NAME="Perl"'^
+ok: 9^
 
  C: unlink 'actual.txt'^
 
