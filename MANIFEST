@@ -1,0 +1,6 @@
+lib/Docs/Site_SVD/Text_Scrub.pm
+MANIFEST
+Makefile.PL
+README
+lib/Text/Scrub.pm
+t/Text/Scrub.t
