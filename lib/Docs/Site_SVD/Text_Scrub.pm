@@ -10,24 +10,26 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.04';
-$DATE = '2003/09/19';
+$VERSION = '0.05';
+$DATE = '2004/05/04';
 $FILE = __FILE__;
 
 use vars qw(%INVENTORY);
 %INVENTORY = (
-    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.04 2003/09/19), 'revised 0.03'],
-    'MANIFEST' => [qw(0.04 2003/09/19), 'generated, replaces 0.03'],
-    'Makefile.PL' => [qw(0.04 2003/09/19), 'generated, replaces 0.03'],
-    'README' => [qw(0.04 2003/09/19), 'generated, replaces 0.03'],
-    'lib/Text/Scrub.pm' => [qw(1.11 2003/09/19), 'revised 1.09'],
-    't/Text/Scrub.d' => [qw(0.01 2003/09/19), 'new'],
-    't/Text/Scrub.pm' => [qw(0.01 2003/09/19), 'new'],
-    't/Text/Scrub.t' => [qw(0.08 2003/09/19), 'revised 0.07'],
-    'tlib/File/Package.pm' => [qw(1.12 2003/09/19), 'unchanged'],
-    'tlib/Test/Tech.pm' => [qw(1.14 2003/09/19), 'new'],
-    'tlib/Data/Secs2.pm' => [qw(1.14 2003/09/19), 'new'],
-    'tlib/File/SmartNL.pm' => [qw(1.12 2003/09/19), 'new'],
+    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.05 2004/05/04), 'revised 0.04'],
+    'MANIFEST' => [qw(0.05 2004/05/04), 'generated, replaces 0.04'],
+    'Makefile.PL' => [qw(0.05 2004/05/04), 'generated, replaces 0.04'],
+    'README' => [qw(0.05 2004/05/04), 'generated, replaces 0.04'],
+    'lib/Text/Scrub.pm' => [qw(1.12 2004/05/04), 'revised 1.11'],
+    't/Text/Scrub.d' => [qw(0.02 2004/05/04), 'revised 0.01'],
+    't/Text/Scrub.pm' => [qw(0.02 2004/05/04), 'revised 0.01'],
+    't/Text/Scrub.t' => [qw(0.09 2004/05/04), 'revised 0.08'],
+    't/Text/File/Package.pm' => [qw(1.16 2004/05/04), 'new'],
+    't/Text/Test/Tech.pm' => [qw(1.22 2004/05/04), 'new'],
+    't/Text/Data/Secs2.pm' => [qw(1.19 2004/05/04), 'new'],
+    't/Text/File/SmartNL.pm' => [qw(1.14 2004/05/04), 'new'],
+    't/Text/Data/SecsPack.pm' => [qw(0.04 2004/05/04), 'new'],
+    't/Text/Data/Startup.pm' => [qw(0.04 2004/05/04), 'new'],
 
 );
 
@@ -56,9 +58,9 @@ use vars qw(%INVENTORY);
 
  Revision: B
 
- Version: 0.04
+ Version: 0.05
 
- Date: 2003/09/19
+ Date: 2004/05/04
 
  Prepared for: General Public 
 
@@ -97,7 +99,7 @@ pieces of software to see if there are significant changes.
 
 =head2 1.3 Document overview.
 
-This document releases Text::Scrub version 0.04
+This document releases Text::Scrub version 0.05
 providing a description of the inventory, installation
 instructions and other information necessary to
 utilize and track this release.
@@ -110,12 +112,14 @@ system file specification.
 
 =head2 3.1 Inventory of materials released.
 
-This document releases the file found
-at the following repository(s):
+This document releases the file 
 
-   http://www.softwarediamonds/packages/Text-Scrub-0.04
-   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.04
+ Text-Scrub-0.05.tar.gz
 
+found at the following repository(s):
+
+  http://www.softwarediamonds/packages/
+  http://www.perl.com/CPAN/authors/id/S/SO/SOFTDIA/
 
 Restrictions regarding duplication and license provisions
 are as follows:
@@ -128,7 +132,7 @@ copyright © 2003 Software Diamonds
 
 =item Copyright holder contact.
 
- 603 882-0846 E<lt>support@SoftwareDiamonds.comE<gt>
+ 603 882-0846 E<lt> support@SoftwareDiamonds.com E<gt>
 
 =item License.
 
@@ -182,18 +186,20 @@ consists of the following files:
 
  file                                                         version date       comment
  ------------------------------------------------------------ ------- ---------- ------------------------
- lib/Docs/Site_SVD/Text_Scrub.pm                              0.04    2003/09/19 revised 0.03
- MANIFEST                                                     0.04    2003/09/19 generated, replaces 0.03
- Makefile.PL                                                  0.04    2003/09/19 generated, replaces 0.03
- README                                                       0.04    2003/09/19 generated, replaces 0.03
- lib/Text/Scrub.pm                                            1.11    2003/09/19 revised 1.09
- t/Text/Scrub.d                                               0.01    2003/09/19 new
- t/Text/Scrub.pm                                              0.01    2003/09/19 new
- t/Text/Scrub.t                                               0.08    2003/09/19 revised 0.07
- tlib/File/Package.pm                                         1.12    2003/09/19 unchanged
- tlib/Test/Tech.pm                                            1.14    2003/09/19 new
- tlib/Data/Secs2.pm                                           1.14    2003/09/19 new
- tlib/File/SmartNL.pm                                         1.12    2003/09/19 new
+ lib/Docs/Site_SVD/Text_Scrub.pm                              0.05    2004/05/04 revised 0.04
+ MANIFEST                                                     0.05    2004/05/04 generated, replaces 0.04
+ Makefile.PL                                                  0.05    2004/05/04 generated, replaces 0.04
+ README                                                       0.05    2004/05/04 generated, replaces 0.04
+ lib/Text/Scrub.pm                                            1.12    2004/05/04 revised 1.11
+ t/Text/Scrub.d                                               0.02    2004/05/04 revised 0.01
+ t/Text/Scrub.pm                                              0.02    2004/05/04 revised 0.01
+ t/Text/Scrub.t                                               0.09    2004/05/04 revised 0.08
+ t/Text/File/Package.pm                                       1.16    2004/05/04 new
+ t/Text/Test/Tech.pm                                          1.22    2004/05/04 new
+ t/Text/Data/Secs2.pm                                         1.19    2004/05/04 new
+ t/Text/File/SmartNL.pm                                       1.14    2004/05/04 new
+ t/Text/Data/SecsPack.pm                                      0.04    2004/05/04 new
+ t/Text/Data/Startup.pm                                       0.04    2004/05/04 new
 
 
 =head2 3.3 Changes
@@ -259,6 +265,16 @@ a directory with mode of 666.
 Changes the 'stringify' module for 'Test-Tech' from
 'Data::Strify' to 'Data::Secs2'.
 
+=item Text-Scrub-0.05
+
+The lastest build of Test::STDmaker expects the test library in the same
+directory as the test script.
+Coordiated with the lastest Test::STDmaker by moving the
+test library from tlib to t/Text, the same directory as the test script
+and deleting the test library File::TestPath program module.
+
+Added "SEE ALSO" section. Reworked QUALITY ASSURANCE and NOTES sections.
+
 =back
 
 =head2 3.4 Adaptation data.
@@ -283,18 +299,36 @@ and installation support are as follows:
 
 =item Installation Instructions.
 
-To installed the release file, use the CPAN module in the Perl release
+To installed the release file, use the CPAN module
+pr PPM module in the Perl release
 or the INSTALL.PL script at the following web site:
 
  http://packages.SoftwareDiamonds.com
 
 Follow the instructions for the the chosen installation software.
 
-The distribution file is at the following respositories:
+If all else fails, the file may be manually installed.
+Enter one of the following repositories in a web browser:
 
-   http://www.softwarediamonds/packages/Text-Scrub-0.04
-   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.04
+  http://www.softwarediamonds/packages/
+  http://www.perl.com/CPAN/authors/id/S/SO/SOFTDIA/
 
+Right click on 'Text-Scrub-0.05.tar.gz' and download to a temporary
+installation directory.
+Enter the following where $make is 'nmake' for microsoft
+windows; otherwise 'make'.
+
+ gunzip Text-Scrub-0.05.tar.gz
+ tar -xf Text-Scrub-0.05.tar
+ perl Makefile.PL
+ $make test
+ $make install
+
+On Microsoft operating system, nmake, tar, and gunzip 
+must be in the exeuction path. If tar and gunzip are
+not install, download and install unxutils from
+
+ http://packages.softwarediamonds.com
 
 =item Prerequistes.
 
@@ -317,7 +351,7 @@ as part of the installation:
 If there are installation problems or questions with the installation
 contact
 
- 603 882-0846 E<lt>support@SoftwareDiamonds.comE<gt>
+ 603 882-0846 E<lt> support@SoftwareDiamonds.com E<gt>
 
 =back
 
@@ -333,24 +367,6 @@ of this module as follows:
 State the functional requirements for each method 
 including not only the GO paths but also what to
 expect for the NOGO paths
-
-=item *
-
-All the tests are GO path tests. Should add
-NOGO tests.
-
-=item *
-
-Add the requirements addressed as I<# R: >
-comment to the tests
-
-=item *
-
-Write a program to build a matrix to trace
-test step to the requirements and vice versa by
-parsing the I<# R: > comments.
-Automatically insert the matrix in the
-Test::TestUtil POD.
 
 =back
 
@@ -383,20 +399,7 @@ extension for a Perl test script file
 =back
 
 =for html
-<hr>
-<p><br>
-<!-- BLK ID="PROJECT_MANAGEMENT" -->
-<!-- /BLK -->
-<p><br>
-<!-- BLK ID="NOTICE" -->
-<!-- /BLK -->
-<p><br>
-<!-- BLK ID="OPT-IN" -->
-<!-- /BLK -->
-<p><br>
-<!-- BLK ID="LOG_CGI" -->
-<!-- /BLK -->
-<p><br>
+
 
 =cut
 
@@ -407,10 +410,10 @@ __DATA__
 DISTNAME: Text-Scrub^
 REPOSITORY_DIR: packages^
 
-VERSION : 0.04^
+VERSION : 0.05^
 FREEZE: 1^
 PREVIOUS_DISTNAME:  ^
-PREVIOUS_RELEASE: 0.03^
+PREVIOUS_RELEASE: 0.04^
 REVISION: B^
 
 AUTHOR  : SoftwareDiamonds.com E<lt>support@SoftwareDiamonds.comE<gt>^
@@ -425,7 +428,7 @@ SVD_FSPEC: Unix^
 
 REPOSITORY: 
   http://www.softwarediamonds/packages/
-  http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/
+  http://www.perl.com/CPAN/authors/id/S/SO/SOFTDIA/
 ^
 
 COMPRESS: gzip^
@@ -437,13 +440,16 @@ CHANGE2CURRENT:  ^
 AUTO_REVISE: 
 lib/Text/Scrub.pm
 t/Text/Scrub.*
-lib/File/Package.pm => tlib/File/Package.pm
-lib/Test/Tech.pm => tlib/Test/Tech.pm
-lib/Data/Secs2.pm => tlib/Data/Secs2.pm
-lib/File/SmartNL.pm => tlib/File/SmartNL.pm
+lib/File/Package.pm => t/Text/File/Package.pm
+lib/Test/Tech.pm => t/Text/Test/Tech.pm
+lib/Data/Secs2.pm => t/Text/Data/Secs2.pm
+lib/File/SmartNL.pm => t/Text/File/SmartNL.pm
+lib/Data/SecsPack.pm => t/Text/Data/SecsPack.pm
+lib/Data/Startup.pm => t/Text/Data/Startup.pm
 ^
 
 PREREQ_PM:  ^
+README_PODS: lib/Text/Scrub.pm^
 TESTS: t/Text/Scrub.t^
 
 EXE_FILES:  ^
@@ -510,6 +516,16 @@ a directory with mode of 666.
 Changes the 'stringify' module for 'Test-Tech' from
 'Data::Strify' to 'Data::Secs2'.
 
+\=item Text-Scrub-0.05
+
+The lastest build of Test::STDmaker expects the test library in the same
+directory as the test script.
+Coordiated with the lastest Test::STDmaker by moving the
+test library from tlib to t/Text, the same directory as the test script
+and deleting the test library File::TestPath program module.
+
+Added "SEE ALSO" section. Reworked QUALITY ASSURANCE and NOTES sections.
+
 \=back
 
 ^
@@ -548,24 +564,6 @@ of this module as follows:
 State the functional requirements for each method 
 including not only the GO paths but also what to
 expect for the NOGO paths
-
-\=item *
-
-All the tests are GO path tests. Should add
-NOGO tests.
-
-\=item *
-
-Add the requirements addressed as I<# R: >
-comment to the tests
-
-\=item *
-
-Write a program to build a matrix to trace
-test step to the requirements and vice versa by
-parsing the I<# R: > comments.
-Automatically insert the matrix in the
-Test::TestUtil POD.
 
 \=back
 
@@ -616,19 +614,39 @@ ANY WAY OUT OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
 INSTALLATION:
-To installed the release file, use the CPAN module in the Perl release
+To installed the release file, use the CPAN module
+pr PPM module in the Perl release
 or the INSTALL.PL script at the following web site:
 
  http://packages.SoftwareDiamonds.com
 
 Follow the instructions for the the chosen installation software.
 
-The distribution file is at the following respositories:
+If all else fails, the file may be manually installed.
+Enter one of the following repositories in a web browser:
 
 ${REPOSITORY}
+
+Right click on '${DIST_FILE}' and download to a temporary
+installation directory.
+Enter the following where $make is 'nmake' for microsoft
+windows; otherwise 'make'.
+
+ gunzip ${BASE_DIST_FILE}.tar.${COMPRESS_SUFFIX}
+ tar -xf ${BASE_DIST_FILE}.tar
+ perl Makefile.PL
+ $make test
+ $make install
+
+On Microsoft operating system, nmake, tar, and gunzip 
+must be in the exeuction path. If tar and gunzip are
+not install, download and install unxutils from
+
+ http://packages.softwarediamonds.com
 ^
 
-SUPPORT: 603 882-0846 E<lt>support@SoftwareDiamonds.comE<gt>^
+SUPPORT: 603 882-0846 E<lt> support@SoftwareDiamonds.com E<gt>
+^
 
 NOTES:
 The following are useful acronyms:
@@ -647,6 +665,7 @@ extension for a Perl test script file
 ^
 
 SEE_ALSO: 
+
 \=over 4
 
 \=item L<Text::Scrub|Text::Scrub> 
@@ -660,20 +679,7 @@ SEE_ALSO:
 
 
 HTML:
-<hr>
-<p><br>
-<!-- BLK ID="PROJECT_MANAGEMENT" -->
-<!-- /BLK -->
-<p><br>
-<!-- BLK ID="NOTICE" -->
-<!-- /BLK -->
-<p><br>
-<!-- BLK ID="OPT-IN" -->
-<!-- /BLK -->
-<p><br>
-<!-- BLK ID="LOG_CGI" -->
-<!-- /BLK -->
-<p><br>
+
 ^
 ~-~
 

@@ -23,7 +23,7 @@ my $tests = join ' ',unix2os('t/Text/Scrub.t');
 WriteMakefile(
     NAME => 'Text::Scrub',
     DISTNAME => 'Text-Scrub',
-    VERSION  => '0.04',
+    VERSION  => '0.05',
     dist     => {COMPRESS => 'gzip',
                 'gz' => 'gz'},
     test     => {TESTS => $tests},

@@ -6,7 +6,9 @@ lib/Text/Scrub.pm
 t/Text/Scrub.d
 t/Text/Scrub.pm
 t/Text/Scrub.t
-tlib/File/Package.pm
-tlib/Test/Tech.pm
-tlib/Data/Secs2.pm
-tlib/File/SmartNL.pm
+t/Text/File/Package.pm
+t/Text/Test/Tech.pm
+t/Text/Data/Secs2.pm
+t/Text/File/SmartNL.pm
+t/Text/Data/SecsPack.pm
+t/Text/Data/Startup.pm
