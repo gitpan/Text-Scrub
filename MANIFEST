@@ -3,5 +3,10 @@ MANIFEST
 Makefile.PL
 README
 lib/Text/Scrub.pm
+t/Text/Scrub.d
+t/Text/Scrub.pm
 t/Text/Scrub.t
 tlib/File/Package.pm
+tlib/Test/Tech.pm
+tlib/Data/Secs2.pm
+tlib/File/SmartNL.pm

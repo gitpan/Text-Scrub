@@ -12,9 +12,17 @@ use warnings::register;
 use SelfLoader;
 
 use vars qw($VERSION $DATE $FILE);
-$VERSION = '1.09';
-$DATE = '2003/07/05';
-$FILE = __FILE__
+$VERSION = '1.11';
+$DATE = '2003/09/19';
+$FILE = __FILE__;
+
+use vars qw(@ISA @EXPORT_OK);
+require Exporter;
+@ISA= qw(Exporter);
+@EXPORT_OK = qw(scrub_date scrub_date_ticket scrub_date_version
+                scrub_file_line scrub_probe scrub_test_file);
+
+1
 
 __DATA__
 
@@ -24,7 +32,13 @@ __DATA__
 #
 sub scrub_file_line
 {
-    my (undef, $text) = @_;
+    ######
+    # This subroutine uses no object data; therefore,
+    # drop any class or object.
+    #
+    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+
+    my ($text) = @_;
 
     return $text unless $text;
 
@@ -43,7 +57,13 @@ sub scrub_file_line
 #
 sub scrub_test_file
 {
-    my (undef, $text) = @_;
+    ######
+    # This subroutine uses no object data; therefore,
+    # drop any class or object.
+    #
+    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+
+    my ($text) = @_;
 
     return $text unless $text;
 
@@ -62,7 +82,13 @@ sub scrub_test_file
 #
 sub scrub_date
 {
-    my (undef, $text) = (@_);
+    ######
+    # This subroutine uses no object data; therefore,
+    # drop any class or object.
+    #
+    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+
+    my ($text) = (@_);
     $text =~ s|([ '"(]?)\d{2,4}/\d{1,2}/\d{1,2}([ '")\n]?)|${1}1969/02/06${2}|g;
     $text
 
@@ -74,7 +100,13 @@ sub scrub_date
 #
 sub scrub_date_version
 {
-    my (undef, $text) = @_;
+    ######
+    # This subroutine uses no object data; therefore,
+    # drop any class or object.
+    #
+    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+
+    my ($text) = @_;
 
     return $text unless $text;
 
@@ -95,7 +127,13 @@ sub scrub_date_version
 #
 sub scrub_date_ticket
 {
-    my (undef, $email) = @_;
+    ######
+    # This subroutine uses no object data; therefore,
+    # drop any class or object.
+    #
+    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+
+    my ($email) = @_;
 
     $email =~ s/Date: .*?\n/Date: Feb 6 00 00 00 1969 +0000\n/ig;
 
@@ -126,9 +164,15 @@ sub scrub_date_ticket
 #
 sub scrub_probe
 {
-   my (undef, $text) = @_;
-   $text =~ s/^(.*?\n)(.*?)\#\s+=cut\s*\n/$1/s;
-   $text
+    ######
+    # This subroutine uses no object data; therefore,
+    # drop any class or object.
+    #
+    shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+
+    my ($text) = @_;
+    $text =~ s/^(.*?\n)(.*?)\#\s+=cut\s*\n/$1/s;
+    $text
 }
 
 
@@ -140,10 +184,27 @@ __END__
 
 =head1 NAME
   
-Text::STDutil - used to wild card out text used for comparison
+Text::Scrub - used to wild card out text used for comparison
 
 =head1 SYNOPSIS
 
+
+  #########
+  # Subroutine Interface
+  #
+  use Text::Scrub qw(scrub_date scrub_date_ticket scrub_date_version
+                     scrub_file_line scrub_probe scrub_test_file);
+
+  $scrubbed_text = scrub_date($script_text)
+  $scrubbed_text = scrub_date_ticket($script_text)
+  $scrubbed_text = scrub_date_version($script_text)
+  $scrubbed_text = scrub_file_line($script_text)
+  $scrubbed_text = scrub_probe($script_text)
+  $scrubbed_text = scrub_test_file($script_text)
+
+  #########
+  # Class Interface
+  #
   use Text::Scrub
 
   $scrubbed_text = Text::Scrub->scrub_date($script_text)
@@ -182,26 +243,6 @@ of both files before the comparision will
 eliminate the data and ticket as factors in
 the comparision.
 
-For example,
-
- ==> $text
-
- Date: Feb 6 00 00 00 1969 +0000
- Subject: 20030506, This Week in Health
- X-SDticket: 20030205
- X-eudora-date: Feb 6 2000 00 00 2003 +0000
- X-SDmailit: dead Feb 5 2000 00 00 2003
- Sent email 20030205 to support.softwarediamonds.com
- 
- ==> Test::STD::Scrub->scrub_date_ticket($text)
-
- Date: Feb 6 00 00 00 1969 +0000
- Subject: XXXXXXXXX-X,  This Week in Health'
- X-SDticket: XXXXXXXXX-X
- X-eudora-date: Feb 6 00 00 00 1969 +0000
- X-SDmailit: dead Sat Feb 6 00 00 00 1969 +0000
- Sent email XXXXXXXXX-X to support.softwarediamonds.com
-
 =head2 scrub_date_version
 
  $scrubbed_text = Test::STD::Scrub->scrub_date_version($script_text)
@@ -215,18 +256,6 @@ Applying the I<scrub_date_ticket> to the contents
 of both files before the comparision will 
 eliminate the date and version as factors in
 the comparision.
-
-For example,
-
- ==> $text
-
- $VERSION = \'0.01\';
- $DATE = \'2003/06/07\';
-
- ==> Test::STD::Scrub->scrub_date_version($text)
-
- $VERSION = '0.00;
- $DATE = 'Feb 6, 1969';
 
 =head2 scrub_file_line
 
@@ -242,16 +271,6 @@ of both files before the comparision will
 eliminate the file and line as factors in
 the comparision.
 
-For example,
-
- ==> $text 
-
- ok 2 # (E:/User/SoftwareDiamonds/installation/t/Test/STDmaker/tgA1.t at line 123 TODO?!)';
-
- ==> Test::STD::Scrub->scrub_file_line($text)
-
- ok 2 # (xxxx.t at line 000 TODO?!)
-
 =head2 scrub_test_file
 
  $scrubbed_text = Test::STD::Scrub->scrub_test_file($script_text)
@@ -266,17 +285,287 @@ of both files before the comparision will
 eliminate the test file as a factor in
 the comparision.
 
-For example,
+=head1 REQUIREMENTS
 
- ==>$text
+Coming soon.
 
- Running Tests\n\nE:/User/SoftwareDiamonds/installation/t/Test/STDmaker/tgA1.1..16 todo 2 5;
+=head1 DEMONSTRATION
 
- ==> Test::STD::Scrub->scrub_test_file($text)
+ ~~~~~~ Demonstration overview ~~~~~
 
- Running Tests xxx.t 1..16 todo 2 5;
+Perl code begins with the prompt
+
+ =>
+
+The selected results from executing the Perl Code 
+follow on the next lines. For example,
+
+ => 2 + 2
+ 4
+
+ ~~~~~~ The demonstration follows ~~~~~
+
+ =>     use File::Spec;
+
+ =>     use File::Package;
+ =>     my $fp = 'File::Package';
+
+ =>     my $uut = 'Text::Scrub';
+
+ =>     my $loaded = '';
+ =>     my $template = '';
+ =>     my %variables = ();
+ =>     my $expected = '';
+ => my $errors = $fp->load_package($uut)
+ => $errors
+ ''
+
+ => my $text = 'ok 2 # (E:/User/SoftwareDiamonds/installation/t/Test/STDmaker/tgA1.t at line 123 TODO?!)'
+ => $uut->scrub_file_line($text)
+ 'ok 2 # (xxxx.t at line 000 TODO?!)'
+
+ => $text = 'Running Tests\n\nE:/User/SoftwareDiamonds/installation/t/Test/STDmaker/tgA1.1..16 todo 2 5;'
+ => $uut->scrub_test_file($text)
+ 'Running Tests xxx.t 1..16 todo 2 5;'
+
+ => $text = '$VERSION = \'0.01\';\n$DATE = \'2003/06/07\';'
+ => $uut->scrub_date_version($text)
+ '$VERSION = '0.00';\n$DATE = 'Feb 6, 1969';'
+
+ => $text = <<'EOF';
+ => Date: Apr 12 00 00 00 2003 +0000
+ => Subject: 20030506, This Week in Health'
+ => X-SDticket: 20030205
+ => X-eudora-date: Feb 6 2000 00 00 2003 +0000
+ => X-SDmailit: dead Feb 5 2000 00 00 2003
+ => Sent email 20030205-20030506 to support.softwarediamonds.com
+ => EOF
+
+ => my $expected_text = <<'EOF';
+ => Date: Feb 6 00 00 00 1969 +0000
+ => Subject: XXXXXXXXX-X,  This Week in Health'
+ => X-SDticket: XXXXXXXXX-X
+ => X-eudora-date: Feb 6 00 00 00 1969 +0000
+ => X-SDmailit: dead Sat Feb 6 00 00 00 1969 +0000
+ => Sent email XXXXXXXXX-X to support.softwarediamonds.com
+ => EOF
+
+ => # end of EOF
+ => $uut->scrub_date_ticket($text)
+ 'Date: Feb 6 00 00 00 1969 +0000
+ Subject: XXXXXXXXX-X,  This Week in Health'
+ X-SDticket: XXXXXXXXX-X
+ X-eudora-date: Feb 6 00 00 00 1969 +0000
+ X-SDmailit: dead Sat Feb 6 00 00 00 1969 +0000
+ Sent email XXXXXXXXX-X to support.softwarediamonds.com
+ '
+
+ => $text = 'Going to happy valley 2003/06/07'
+ => $uut->scrub_date($text)
+ 'Going to happy valley 1969/02/06'
+
+ => $text = <<'EOF';
+ => 1..8 todo 2 5;
+ => # OS            : MSWin32
+ => # Perl          : 5.6.1
+ => # Local Time    : Thu Jun 19 23:49:54 2003
+ => # GMT Time      : Fri Jun 20 03:49:54 2003 GMT
+ => # Number Storage: string
+ => # Test::Tech    : 1.06
+ => # Test          : 1.15
+ => # Data::Dumper  : 2.102
+ => # =cut 
+ => # Pass test
+ => ok 1
+ => EOF
+
+ => $expected_text = <<'EOF';
+ => 1..8 todo 2 5;
+ => # Pass test
+ => ok 1
+ => EOF
+
+ => # end of EOF
+ => $uut->scrub_probe($text)
+ '1..8 todo 2 5;
+ # Pass test
+ ok 1
+ '
+
+ => unlink 'actual.txt'
+
+=head1 QUALITY ASSURANCE
+
+Running the test script 'Scrub.t' found in
+the "Text-Scrub-$VERSION.tar.gz" distribution file verifies
+the requirements for this module.
+
+All testing software and documentation
+stems from the 
+Software Test Description (L<STD|Docs::US_DOD::STD>)
+program module 't::Text::Scrub',
+found in the distribution file 
+"Text-Scrub-$VERSION.tar.gz". 
+
+The 't::Text::Scrub' L<STD|Docs::US_DOD::STD> POD contains
+a tracebility matix between the
+requirements established above for this module, and
+the test steps identified by a
+'ok' number from running the 'Scrub.t'
+test script.
+
+The t::Text::Scrub' L<STD|Docs::US_DOD::STD>
+program module '__DATA__' section contains the data 
+to perform the following:
+
+=over 4
+
+=item *
+
+to generate the test script 'Scrub.t'
+
+=item *
+
+generate the tailored 
+L<STD|Docs::US_DOD::STD> POD in
+the 't::Text::Scrub' module, 
+
+=item *
+
+generate the 'Scrub.d' demo script, 
+
+=item *
+
+Replace the POD demonstration section
+herein with the demo script
+'Scrub.d' output, and
+
+=item *
+
+run the test script using Test::Harness
+with or without the verbose option,
+
+=back
+
+To perform all the above, prepare
+and run the automation software as 
+follows:
+
+=over 4
+
+=item *
+
+Install "Test_STDmaker-$VERSION.tar.gz"
+from one of the respositories only
+if it has not been installed:
+
+=over 4
+
+=item *
+
+http://www.softwarediamonds/packages/
+
+=item *
+
+http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/
+
+=back
+  
+=item *
+
+manually place the script tmake.pl
+in "Test_STDmaker-$VERSION.tar.gz' in
+the site operating system executable 
+path only if it is not in the 
+executable path
+
+=item *
+
+place the 't::Text::Scrub' at the same
+level in the directory struture as the
+directory holding the 'Text::Scrub'
+module
+
+=item *
+
+execute the following in any directory:
+
+ tmake -test_verbose -replace -run -pm=t::Text::Scrub
+
+=back
 
 =head1 NOTES
+
+=head2 FILES
+
+The installation of the
+"Text-Scrub-$VERSION.tar.gz" distribution file
+installs the 'Docs::Site_SVD::Text_Scrub'
+L<SVD|Docs::US_DOD::SVD> program module.
+
+The __DATA__ data section of the 
+'Docs::Site_SVD::Text_Scrub' contains all
+the necessary data to generate the POD
+section of 'Docs::Site_SVD::Text_Scrub' and
+the "Text-Scrub-$VERSION.tar.gz" distribution file.
+
+To make use of the 
+'Docs::Site_SVD::Text_Scrub'
+L<SVD|Docs::US_DOD::SVD> program module,
+perform the following:
+
+=over 4
+
+=item *
+
+install "ExtUtils-SVDmaker-$VERSION.tar.gz"
+from one of the respositories only
+if it has not been installed:
+
+=over 4
+
+=item *
+
+http://www.softwarediamonds/packages/
+
+=item *
+
+http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/
+
+=back
+
+=item *
+
+manually place the script vmake.pl
+in "ExtUtils-SVDmaker-$VERSION.tar.gz' in
+the site operating system executable 
+path only if it is not in the 
+executable path
+
+=item *
+
+Make any appropriate changes to the
+__DATA__ section of the 'Docs::Site_SVD::Text_Scrub'
+module.
+For example, any changes to
+'Text::Scrub' will impact the
+at least 'Changes' field.
+
+=item *
+
+Execute the following:
+
+ vmake readme_html all -pm=Docs::Site_SVD::Text_Scrub
+
+=back
+
+=head1 NOTES
+
+=head2 AUTHOR
+
+The holder of the copyright and maintainer is
+
+E<lt>support@SoftwareDiamonds.comE<gt>
 
 =head2 COPYRIGHT NOTICE
 

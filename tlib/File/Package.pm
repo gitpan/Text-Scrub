@@ -11,15 +11,20 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE);
-$VERSION = '1.11';
-$DATE = '2003/07/27';
+$VERSION = '1.12';
+$DATE = '2003/09/15';
 $FILE = __FILE__;
+
+use vars qw(@ISA @EXPORT_OK);
+require Exporter;
+@ISA= qw(Exporter);
+@EXPORT_OK = qw(load_package is_package_loaded);
 
 use SelfLoader;
 
-1
+# 1;
 
-__DATA__
+# __DATA__
 
 
 ######
@@ -27,43 +32,73 @@ __DATA__
 #
 sub load_package
 {
+     ######
+     # This subroutine uses no object data; therefore,
+     # drop any class or object.
+     #
+     shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
 
-    my (undef, $package) = @_;
-    unless ($package) { # have problem if there is no package
-        my $error = "# The package name is empty. There is no package to load.\n";
-        return $error;
-    }
-    if( $package =~ /\-/ ) {
-        my $error =  "# The - in $package causes problems. Perl thinks - is subtraction when it evals it.\n";
-        return $error;      
-    }
-    return '' if File::Package->is_package_loaded( $package );
+     my ($package, @import) = @_;
+     unless ($package) { # have problem if there is no package
+         my $error = "# The package name is empty. There is no package to load.\n";
+         return $error;
+     }
+     if( $package =~ /\-/ ) {
+         my $error =  "# The - in $package causes problems. Perl thinks - is subtraction when it evals it.\n";
+         return $error;      
+     }
+     if (File::Package->is_package_loaded( $package )) {
+         my $restore_level = $Exporter::ExportLevel;
+         $Exporter::ExportLevel = 1;
+         if( @import ) {
+             if ($import[0] ) {
+                 $package->import( @import );
+             }
+         }
+         else {
+             $package->import( );
+         }
+         $Exporter::ExportLevel = $restore_level;  
+         return '';
+     }
 
-    #####
-    # Load the module
-    #
-    # On error when evaluating "require $package" only the last
-    # line of STDERR, at least on one Perl, is return in $@.
-    # Save the entire STDERR to a memory variable
-    #
-    my $restore_warn = $SIG{__WARN__};
-    my $warn_string = '';
-    $SIG{__WARN__} = sub { $warn_string .= join '', @_; };
-    eval "require $package;";
-    $SIG{__WARN__} = $restore_warn;
-    $warn_string = $@ . $warn_string if $@;
-    if($warn_string) {
-        $warn_string =~ s/\n/\n\t/g;
-        return "Cannot load $package\n\t" . $warn_string;
-    }
+     #####
+     # Load the module
+     #
+     # On error when evaluating "require $package" only the last
+     # line of STDERR, at least on one Perl, is return in $@.
+     # Save the entire STDERR to a memory variable
+     #
+     my $restore_warn = $SIG{__WARN__};
+     my $warn_string = '';
+     $SIG{__WARN__} = sub { $warn_string .= join '', @_; };
+     eval "require $package;";
+     $SIG{__WARN__} = $restore_warn;
+     $warn_string = $@ . $warn_string if $@;
+     if($warn_string) {
+         $warn_string =~ s/\n/\n\t/g;
+         return "Cannot load $package\n\t" . $warn_string;
+     }
 
-    #####
-    # Verify the package vocabulary is present
-    #
-    unless (File::Package->is_package_loaded( $package )) {
-        return "# $package loaded but package vocabulary absent.\n";
-    }
-    ''
+     #####
+     # Verify the package vocabulary is present
+     #
+     unless (File::Package->is_package_loaded( $package )) {
+         return "# $package loaded but package vocabulary absent.\n";
+     }
+     my $restore_level = $Exporter::ExportLevel;
+     $Exporter::ExportLevel = 1;
+     if( @import ) {
+         if ($import[0] ) {
+             $package->import( @import );
+         }
+     }
+     else {
+         $package->import( );
+     }
+     $Exporter::ExportLevel = $restore_level;  
+
+     ''
 }
 
 
@@ -72,15 +107,17 @@ sub load_package
 #
 sub is_package_loaded
 {
-    my (undef, $package) = @_;
+     ######
+     # This subroutine uses no object data; therefore,
+     # drop any class or object.
+     #
+     shift @_ if UNIVERSAL::isa($_[0],__PACKAGE__);
+
+     my ($package) = @_;
    
-    $package .= "::";
-    defined %$package
-
+     $package .= "::";
+     defined %$package
 }
-
-
-
 
 1
 
@@ -93,29 +130,70 @@ File::Package - test load a program module with a package of the same name
 
 =head1 SYNOPSIS
 
-  use File::Package
+ ##########
+ # Subroutine interface
+ #
+ use File::Package qw( is_package_loaded, load_package)
 
-  $package       = File::Package->is_package_loaded($package)
-  $error         = File::Package->load_package($package)
+ $package = is_package_loaded($package)
+ $error   = load_package($package)
+ $error   = load_package($package, @import)
+
+ ##########
+ # Class Interface
+ # 
+ use File::Package
+
+ $package = File::Package->is_package_loaded($package)
+ $error   = File::Package->load_package($package)
+ $error   = File::Package->load_package($package, @import)
+
+ ###### 
+ # Class Interface - Add File::Package to another class
+ #
+ use File::Package
+ use vars qw(@ISA)
+ @ISA = qw(File::Package)
+
+ $package = __PACKAGE__->is_package_loaded($package)
+ $error   = __PACKAGE__->load_package($package)
+ $error   = __PACKAGE__->load_package($package, @import)
 
 =head1 DESCRIPTION
 
-One very useful test of the installation of a package is whether
-or not the package loaded.
-If it did not load, the reason it did not load is helpful
-diagnostics.
+The I<load_package> method attempts to capture any load problems by
+loading the package with a "require " under an eval and capturing
+all the "warn" and $@ messages. 
+The I<@import> is optional and causes the load package messages
+to import the symbols named by I<@import>.
 
+One very useful application is in test scripts. 
+If a package does load, it is very helpful that the program does
+not die and reports the reason the package did not load. 
 This information is readily available when loaded at a local site.
 However, it the load occurs at a remote site and the load crashes
 Perl, the remote tester usually will not have this information
-readily available.
+readily available. 
 
-The load_package method attempts to capture any load problems by
-loading the package with a "require " under an eval and capturing
-all the "warn" and $@ messages.
-The error messages are returned so that they may be appropriately
-tested and if not as expected the actual and expected included
-in failure report back to the author of the package.
+If using it in a test script with the
+'Test' module, be sure to use two arguments 
+(2nd argument must be defined, not 0, not '')
+for &Test::ok; 
+otherwise the &Test::ok will not output the
+the actual and expected in the failure error report.
+For example,
+
+ use Test;
+ use File::Package qw(load_package);
+ my $load_error = load_package($package_name);
+ ok(!$load_error, 1);
+
+ # skip rests of the tests unless $load_error eq ''
+
+Other applications include using backup alternative software
+if a package does not load. For example if the package
+'Compress::Zlib' did not load, an attempt may be made
+to use the gzip system command. 
 
 =head1 METHODS
 
@@ -135,7 +213,225 @@ For example, if I<File::Basename> is not loaded
 
 Coming soon.
 
+=head1 DEMONSTRATION
+
+ ~~~~~~ Demonstration overview ~~~~~
+
+Perl code begins with the prompt
+
+ =>
+
+The selected results from executing the Perl Code 
+follow on the next lines. For example,
+
+ => 2 + 2
+ 4
+
+ ~~~~~~ The demonstration follows ~~~~~
+
+ =>     use File::Spec;
+
+ =>     use File::Package;
+ =>     my $uut = 'File::Package';
+ =>     use File::Package;
+ => my $errors = $uut->load_package( 'File::Basename' )
+ ''
+
+ => '' ne ($errors = $uut->load_package( 't::File::BadLoad' ) )
+ '1'
+
+ => '' ne ($errors = $uut->load_package( 't::File::BadVocab' ) )
+ '1'
+
+ => !defined($main::{'find'})
+ '1'
+
+ => $errors = $uut->load_package( 'File::Find', 'find' )
+ ''
+
+ => defined($main::{'find'})
+ '1'
+
+ => !defined($main::{'finddepth'})
+ '1'
+
+ => $errors = $uut->load_package( 'File::Find', '')
+ ''
+
+ => !defined($main::{'finddepth'})
+ '1'
+
+ => $errors = $uut->load_package( 'File::Find')
+ ''
+
+ => defined($main::{'finddepth'})
+ '1'
+
+
+=head1 QUALITY ASSURANCE
+
+Running the test script 'Package.t' found in
+the "File-Package-$VERSION.tar.gz" distribution file verifies
+the requirements for this module.
+
+All testing software and documentation
+stems from the 
+Software Test Description (L<STD|Docs::US_DOD::STD>)
+program module 't::File::Package',
+found in the distribution file 
+"File-Package-$VERSION.tar.gz". 
+
+The 't::File::Package' L<STD|Docs::US_DOD::STD> POD contains
+a tracebility matix between the
+requirements established above for this module, and
+the test steps identified by a
+'ok' number from running the 'Package.t'
+test script.
+
+The t::File::Package' L<STD|Docs::US_DOD::STD>
+program module '__DATA__' section contains the data 
+to perform the following:
+
+=over 4
+
+=item *
+
+to generate the test script 'Package.t'
+
+=item *
+
+generate the tailored 
+L<STD|Docs::US_DOD::STD> POD in
+the 't::File::Package' module, 
+
+=item *
+
+generate the 'Package.d' demo script, 
+
+=item *
+
+replace the POD demonstration section
+herein with the demo script
+'Package.d' output, and
+
+=item *
+
+run the test script using Test::Harness
+with or without the verbose option,
+
+=back
+
+To perform all the above, prepare
+and run the automation software as 
+follows:
+
+=over 4
+
+=item *
+
+Install "Test_STDmaker-$VERSION.tar.gz"
+from one of the respositories only
+if it has not been installed:
+
+=over 4
+
+=item *
+
+http://www.softwarediamonds/packages/
+
+=item *
+
+http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/
+
+=back
+  
+=item *
+
+manually place the script tmake.pl
+in "Test_STDmaker-$VERSION.tar.gz' in
+the site operating system executable 
+path only if it is not in the 
+executable path
+
+=item *
+
+place the 't::File::Package' at the same
+level in the directory struture as the
+directory holding the 'File::Package'
+module
+
+=item *
+
+execute the following in any directory:
+
+ tmake -test_verbose -replace -run -pm=t::File::Package
+
+=back
+
 =head1 NOTES
+
+=head2 FILES
+
+The installation of the
+"File-Package-$VERSION.tar.gz" distribution file
+installs the 'Docs::Site_SVD::File_Package'
+L<SVD|Docs::US_DOD::SVD> program module.
+
+The __DATA__ data section of the 
+'Docs::Site_SVD::File_Package' contains all
+the necessary data to generate the POD
+section of 'Docs::Site_SVD::File_Package' and
+the "File-Package-$VERSION.tar.gz" distribution file.
+
+To make use of the 
+'Docs::Site_SVD::File_Package'
+L<SVD|Docs::US_DOD::SVD> program module,
+perform the following:
+
+=over 4
+
+=item *
+
+install "ExtUtils-SVDmaker-$VERSION.tar.gz"
+from one of the respositories only
+if it has not been installed:
+
+=over 4
+
+=item *
+
+http://www.softwarediamonds/packages/
+
+=item *
+
+http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/
+
+=back
+
+=item *
+
+manually place the script vmake.pl
+in "ExtUtils-SVDmaker-$VERSION.tar.gz' in
+the site operating system executable 
+path only if it is not in the 
+executable path
+
+=item *
+
+Make any appropriate changes to the
+__DATA__ section of the 'Docs::Site_SVD::File_Package'
+module.
+For example, any changes to
+'File::Package' will impact the
+at least 'Changes' field.
+
+=item *
+
+Execute the following:
+
+ vmake readme_html all -pm=Docs::Site_SVD::File_Package
+
+=back
 
 =head2 AUTHOR
 

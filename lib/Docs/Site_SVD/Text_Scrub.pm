@@ -10,19 +10,24 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.02';
-$DATE = '2003/07/27';
+$VERSION = '0.04';
+$DATE = '2003/09/19';
 $FILE = __FILE__;
 
 use vars qw(%INVENTORY);
 %INVENTORY = (
-    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.02 2003/07/27), 'revised 0.01'],
-    'MANIFEST' => [qw(0.02 2003/07/27), 'generated, replaces 0.01'],
-    'Makefile.PL' => [qw(0.02 2003/07/27), 'generated, replaces 0.01'],
-    'README' => [qw(0.02 2003/07/27), 'generated, replaces 0.01'],
-    'lib/Text/Scrub.pm' => [qw(1.09 2003/07/05), 'unchanged'],
-    't/Text/Scrub.t' => [qw(0.07 2003/07/27), 'revised 0.06'],
-    'tlib/File/Package.pm' => [qw(1.11 2003/07/27), 'new'],
+    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.04 2003/09/19), 'revised 0.03'],
+    'MANIFEST' => [qw(0.04 2003/09/19), 'generated, replaces 0.03'],
+    'Makefile.PL' => [qw(0.04 2003/09/19), 'generated, replaces 0.03'],
+    'README' => [qw(0.04 2003/09/19), 'generated, replaces 0.03'],
+    'lib/Text/Scrub.pm' => [qw(1.11 2003/09/19), 'revised 1.09'],
+    't/Text/Scrub.d' => [qw(0.01 2003/09/19), 'new'],
+    't/Text/Scrub.pm' => [qw(0.01 2003/09/19), 'new'],
+    't/Text/Scrub.t' => [qw(0.08 2003/09/19), 'revised 0.07'],
+    'tlib/File/Package.pm' => [qw(1.12 2003/09/19), 'unchanged'],
+    'tlib/Test/Tech.pm' => [qw(1.14 2003/09/19), 'new'],
+    'tlib/Data/Secs2.pm' => [qw(1.14 2003/09/19), 'new'],
+    'tlib/File/SmartNL.pm' => [qw(1.12 2003/09/19), 'new'],
 
 );
 
@@ -49,11 +54,11 @@ use vars qw(%INVENTORY);
 
  Text::Scrub - Utilites to wild card parts of a text file for comparisons.
 
- Revision: A
+ Revision: B
 
- Version: 0.02
+ Version: 0.04
 
- Date: 2003/07/27
+ Date: 2003/09/19
 
  Prepared for: General Public 
 
@@ -92,7 +97,7 @@ pieces of software to see if there are significant changes.
 
 =head2 1.3 Document overview.
 
-This document releases Text::Scrub version 0.02
+This document releases Text::Scrub version 0.04
 providing a description of the inventory, installation
 instructions and other information necessary to
 utilize and track this release.
@@ -108,8 +113,8 @@ system file specification.
 This document releases the file found
 at the following repository(s):
 
-   http://www.softwarediamonds/packages/Text-Scrub-0.02
-   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.02
+   http://www.softwarediamonds/packages/Text-Scrub-0.04
+   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.04
 
 
 Restrictions regarding duplication and license provisions
@@ -177,13 +182,18 @@ consists of the following files:
 
  file                                                         version date       comment
  ------------------------------------------------------------ ------- ---------- ------------------------
- lib/Docs/Site_SVD/Text_Scrub.pm                              0.02    2003/07/27 revised 0.01
- MANIFEST                                                     0.02    2003/07/27 generated, replaces 0.01
- Makefile.PL                                                  0.02    2003/07/27 generated, replaces 0.01
- README                                                       0.02    2003/07/27 generated, replaces 0.01
- lib/Text/Scrub.pm                                            1.09    2003/07/05 unchanged
- t/Text/Scrub.t                                               0.07    2003/07/27 revised 0.06
- tlib/File/Package.pm                                         1.11    2003/07/27 new
+ lib/Docs/Site_SVD/Text_Scrub.pm                              0.04    2003/09/19 revised 0.03
+ MANIFEST                                                     0.04    2003/09/19 generated, replaces 0.03
+ Makefile.PL                                                  0.04    2003/09/19 generated, replaces 0.03
+ README                                                       0.04    2003/09/19 generated, replaces 0.03
+ lib/Text/Scrub.pm                                            1.11    2003/09/19 revised 1.09
+ t/Text/Scrub.d                                               0.01    2003/09/19 new
+ t/Text/Scrub.pm                                              0.01    2003/09/19 new
+ t/Text/Scrub.t                                               0.08    2003/09/19 revised 0.07
+ tlib/File/Package.pm                                         1.12    2003/09/19 unchanged
+ tlib/Test/Tech.pm                                            1.14    2003/09/19 new
+ tlib/Data/Secs2.pm                                           1.14    2003/09/19 new
+ tlib/File/SmartNL.pm                                         1.12    2003/09/19 new
 
 
 =head2 3.3 Changes
@@ -192,7 +202,7 @@ The changes are as follows:
 
 =over 4
 
-=item Test-STD-Scrub 0.01
+=item Test-STD-Scrub-0.01
 
 =over 4
 
@@ -218,7 +228,7 @@ Added the scrub_data and scrub_probe methods
 
 =back
 
-=item Test-STD-Scrub 0.02
+=item Test-STD-Scrub-0.02
 
 Use the new modules from the break-up of the "File::FileUtil" module
 
@@ -236,6 +246,18 @@ test of this module.
 The test of this module will precede immediately.
 The test support files in the tlib directory will vanish after
 the installtion.
+
+=item Text-Scrub-0.03
+
+Recreate distribution file 
+with Archive::TarGzip 0.02 that uses mode 777 for directories instead of 666. Started to get
+emails from Unix installers about untar not being able to change to
+a directory with mode of 666.
+
+=item Text-Scrub-0.04
+
+Changes the 'stringify' module for 'Test-Tech' from
+'Data::Strify' to 'Data::Secs2'.
 
 =back
 
@@ -270,8 +292,8 @@ Follow the instructions for the the chosen installation software.
 
 The distribution file is at the following respositories:
 
-   http://www.softwarediamonds/packages/Text-Scrub-0.02
-   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.02
+   http://www.softwarediamonds/packages/Text-Scrub-0.04
+   http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.04
 
 
 =item Prerequistes.
@@ -352,9 +374,11 @@ extension for a Perl test script file
 
 =over 4
 
-=item L<File::Scrub|File::Scrub> 
+=item L<Text::Scrub|Text::Scrub> 
 
 =item L<Docs::US_DOD::SVD|Docs::US_DOD::SVD> 
+
+=item L<Docs::US_DOD::STD|Docs::US_DOD::STD> 
 
 =back
 
@@ -383,11 +407,11 @@ __DATA__
 DISTNAME: Text-Scrub^
 REPOSITORY_DIR: packages^
 
-VERSION : 0.02^
+VERSION : 0.04^
 FREEZE: 1^
 PREVIOUS_DISTNAME:  ^
-PREVIOUS_RELEASE: 0.01^
-REVISION: A^
+PREVIOUS_RELEASE: 0.03^
+REVISION: B^
 
 AUTHOR  : SoftwareDiamonds.com E<lt>support@SoftwareDiamonds.comE<gt>^
 ABSTRACT: Utilites to wild card parts of a text file for comparisons.^
@@ -412,8 +436,11 @@ CHANGE2CURRENT:  ^
 
 AUTO_REVISE: 
 lib/Text/Scrub.pm
-t/Text/Scrub.t
+t/Text/Scrub.*
 lib/File/Package.pm => tlib/File/Package.pm
+lib/Test/Tech.pm => tlib/Test/Tech.pm
+lib/Data/Secs2.pm => tlib/Data/Secs2.pm
+lib/File/SmartNL.pm => tlib/File/SmartNL.pm
 ^
 
 PREREQ_PM:  ^
@@ -426,7 +453,7 @@ The changes are as follows:
 
 \=over 4
 
-\=item Test-STD-Scrub 0.01
+\=item Test-STD-Scrub-0.01
 
 \=over 4
 
@@ -452,7 +479,7 @@ Added the scrub_data and scrub_probe methods
 
 \=back
 
-\=item Test-STD-Scrub 0.02
+\=item Test-STD-Scrub-0.02
 
 Use the new modules from the break-up of the "File::FileUtil" module
 
@@ -470,6 +497,18 @@ test of this module.
 The test of this module will precede immediately.
 The test support files in the tlib directory will vanish after
 the installtion.
+
+\=item Text-Scrub-0.03
+
+Recreate distribution file 
+with Archive::TarGzip 0.02 that uses mode 777 for directories instead of 666. Started to get
+emails from Unix installers about untar not being able to change to
+a directory with mode of 666.
+
+\=item Text-Scrub-0.04
+
+Changes the 'stringify' module for 'Test-Tech' from
+'Data::Strify' to 'Data::Secs2'.
 
 \=back
 
@@ -610,9 +649,11 @@ extension for a Perl test script file
 SEE_ALSO: 
 \=over 4
 
-\=item L<File::Scrub|File::Scrub> 
+\=item L<Text::Scrub|Text::Scrub> 
 
 \=item L<Docs::US_DOD::SVD|Docs::US_DOD::SVD> 
+
+\=item L<Docs::US_DOD::STD|Docs::US_DOD::STD> 
 
 \=back
 ^

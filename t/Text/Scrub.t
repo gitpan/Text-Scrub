@@ -6,13 +6,34 @@ use strict;
 use warnings;
 use warnings::register;
 
-use vars qw($VERSION $DATE);
-$VERSION = '0.07';
-$DATE = '2003/07/27';
+use vars qw($VERSION $DATE $FILE);
+$VERSION = '0.08';   # automatically generated file
+$DATE = '2003/09/19';
+$FILE = __FILE__;
 
+use Getopt::Long;
 use Cwd;
 use File::Spec;
-use Test;
+
+##### Test Script ####
+#
+# Name: Scrub.t
+#
+# UUT: Text::Scrub
+#
+# The module Test::STDmaker generated this test script from the contents of
+#
+# t::Text::Scrub;
+#
+# Don't edit this test script file, edit instead
+#
+# t::Text::Scrub;
+#
+#	ANY CHANGES MADE HERE TO THIS SCRIPT FILE WILL BE LOST
+#
+#       the next time Test::STDmaker generates this script file.
+#
+#
 
 ######
 #
@@ -21,20 +42,13 @@ use Test;
 # use a BEGIN block so we print our plan before Module Under Test is loaded
 #
 BEGIN { 
-   use vars qw($__restore_dir__ @__restore_inc__ $__tests__);
-
-   ########
-   # Create the test plan by supplying the number of tests
-   # and the todo tests
-   #
-   $__tests__ = 8;
-   plan(tests => $__tests__);
+   use vars qw( $__restore_dir__ @__restore_inc__);
 
    ########
    # Working directory is that of the script file
    #
    $__restore_dir__ = cwd();
-   my ($vol, $dirs, undef) = File::Spec->splitpath( __FILE__ );
+   my ($vol, $dirs) = File::Spec->splitpath(__FILE__);
    chdir $vol if $vol;
    chdir $dirs if $dirs;
    ($vol, $dirs) = File::Spec->splitpath(cwd(), 'nofile'); # absolutify
@@ -58,22 +72,61 @@ BEGIN {
    my $lib_dir = cwd();
 
    #####
+   # Add this to the include path. Thus modules that start with t::
+   # will be found.
+   # 
+   $lib_dir =~ s|/|\\|g if $^O eq 'MSWin32';  # microsoft abberation
+   unshift @INC, $lib_dir;  # include the current test directory
+
+   #####
    # Add lib to the include path so that modules under lib at the
    # same level as t, will be found
    #
-   my $inc_dir = File::Spec->catdir( $lib_dir, 'lib' );
-   $inc_dir =~ s|/|\\|g if $^O eq 'MSWin32';  # microsoft abberation
-   unshift @INC, $inc_dir;
+   $lib_dir = File::Spec->catdir( cwd(), 'lib' );
+   $lib_dir =~ s|/|\\|g if $^O eq 'MSWin32';  # microsoft abberation
+   unshift @INC, $lib_dir;
 
    #####
    # Add tlib to the include path so that modules under tlib at the
    # same level as t, will be found
    #
-   $inc_dir = File::Spec->catdir( $lib_dir, 'tlib' );
-   $inc_dir =~ s|/|\\|g if $^O eq 'MSWin32';  # microsoft abberation
-   unshift @INC, $inc_dir;
+   $lib_dir = File::Spec->catdir( cwd(), 'tlib' );
+   $lib_dir =~ s|/|\\|g if $^O eq 'MSWin32';  # microsoft abberation
+   unshift @INC, $lib_dir;
    chdir $dirs if $dirs;
+ 
+   #####
+   # Add lib under the directory where the test script resides.
+   # This may be used to place version sensitive modules.
+   #
+   $lib_dir = File::Spec->catdir( cwd(), 'lib' );
+   $lib_dir =~ s|/|\\|g if $^O eq 'MSWin32';  # microsoft abberation
+   unshift @INC, $lib_dir;
+
+   ##########
+   # Pick up a output redirection file and tests to skip
+   # from the command line.
+   #
+   my $test_log = '';
+   GetOptions('log=s' => \$test_log);
+
+   ########
+   # Using Test::Tech, a very light layer over the module "Test" to
+   # conduct the tests.  The big feature of the "Test::Tech: module
+   # is that it takes a expected and actual reference and stringify
+   # them by using "Data::Dumper" before passing them to the "ok"
+   # in test.
+   #
+   # Create the test plan by supplying the number of tests
+   # and the todo tests
+   #
+   require Test::Tech;
+   Test::Tech->import( qw(plan ok skip skip_tests tech_config) );
+   plan(tests => 8);
+
 }
+
+
 
 END {
 
@@ -84,70 +137,69 @@ END {
    chdir $__restore_dir__;
 }
 
+   # Perl code from C:
+    use File::Spec;
 
-#######
-# Create a File::FileUtil object
-#
-use File::Package;
-my $fp = 'File::Package';
-my $s = 'Text::Scrub';
+    use File::Package;
+    my $fp = 'File::Package';
 
-####
-#
-# ok: 1
-#
-# R:
-#
-print "# UUT not loaded.\n";
-my $loaded = $fp->is_package_loaded($s);
-ok( $loaded, ''); # actual results
+    my $uut = 'Text::Scrub';
 
-####
-#
-# ok: 2
-#
-# R:
-#
-print "# Load UUT.\n";
-my $errors = $fp->load_package( $s );
-ok($errors,'');
-skip_rest( $errors, 2 );
+    my $loaded = '';
+    my $template = '';
+    my %variables = ();
+    my $expected = '';
+
+ok(  $loaded = $fp->is_package_loaded($uut), # actual results
+      '', # expected results
+     "",
+     "UUT not loaded");
+
+#  ok:  1
+
+   # Perl code from C:
+my $errors = $fp->load_package($uut);
+
+skip_tests( 1 ) unless skip(
+      $loaded, # condition to skip test   
+      $errors, # actual results
+      '',  # expected results
+      "",
+      "Load UUT");
  
+#  ok:  2
 
-####
-#
-# ok: 3
-#
-print "# scrub_file_line\n";
+   # Perl code from C:
 my $text = 'ok 2 # (E:/User/SoftwareDiamonds/installation/t/Test/STDmaker/tgA1.t at line 123 TODO?!)';
-ok($s->scrub_file_line($text), 'ok 2 # (xxxx.t at line 000 TODO?!)');
 
-####
-#
-# ok: 4
-#
-# R:
-#
-print "# scrub_test_file\n";
+ok(  $uut->scrub_file_line($text), # actual results
+     'ok 2 # (xxxx.t at line 000 TODO?!)', # expected results
+     "",
+     " scrub_file_line");
+
+#  ok:  3
+
+   # Perl code from C:
 $text = 'Running Tests\n\nE:/User/SoftwareDiamonds/installation/t/Test/STDmaker/tgA1.1..16 todo 2 5;';
-ok($s->scrub_test_file($text),'Running Tests xxx.t 1..16 todo 2 5;');
 
-####
-#
-# ok: 5
-#
-print "# scrub_date_version\n";
+ok(  $uut->scrub_test_file($text), # actual results
+     'Running Tests xxx.t 1..16 todo 2 5;', # expected results
+     "",
+     " scrub_test_file");
+
+#  ok:  4
+
+   # Perl code from C:
 $text = '$VERSION = \'0.01\';\n$DATE = \'2003/06/07\';';
-ok($s->scrub_date_version($text),'$VERSION = \'0.00\';\n$DATE = \'Feb 6, 1969\';');
 
-####
-#
-# ok: 6
-#
-# R:
-#
-print "# scrub_date_ticket\n";
+ok(  $uut->scrub_date_version($text), # actual results
+     '$VERSION = \'0.00\';\n$DATE = \'Feb 6, 1969\';', # expected results
+     "",
+     " scrub_date_version");
 
+#  ok:  5
+
+   # Perl code from C:
 $text = <<'EOF';
 Date: Apr 12 00 00 00 2003 +0000
 Subject: 20030506, This Week in Health'
@@ -166,26 +218,26 @@ X-SDmailit: dead Sat Feb 6 00 00 00 1969 +0000
 Sent email XXXXXXXXX-X to support.softwarediamonds.com
 EOF
 
-ok($s->scrub_date_ticket($text), $expected_text);
+# end of EOF;
 
+ok(  $uut->scrub_date_ticket($text), # actual results
+     $expected_text, # expected results
+     "",
+     " scrub_date_ticket");
 
-####
-#
-# ok: 7
-#
-print "# scrub_date\n";
+#  ok:  6
+
+   # Perl code from C:
 $text = 'Going to happy valley 2003/06/07';
-ok($s->scrub_date($text),'Going to happy valley 1969/02/06');
 
+ok(  $uut->scrub_date($text), # actual results
+     'Going to happy valley 1969/02/06', # expected results
+     "",
+     " scrub_date");
 
-####
-#
-# ok: 8
-#
-# R:
-#
-print "# scrub_probe\n";
+#  ok:  7
 
+   # Perl code from C:
 $text = <<'EOF';
 1..8 todo 2 5;
 # OS            : MSWin32
@@ -207,37 +259,40 @@ $expected_text = <<'EOF';
 ok 1
 EOF
 
-ok($s->scrub_probe($text), $expected_text);
+# end of EOF;
 
+ok(  $uut->scrub_probe($text), # actual results
+     $expected_text, # expected results
+     "",
+     " scrub_probe");
 
+#  ok:  8
+
+   # Perl code from C:
 unlink 'actual.txt';
 
-####
-# 
-# Support:
-#
-# The ok user caller to look up the stack. If nothing there,
-# ok produces a warining. Thus, burying it in a subroutine eliminates
-# these warning.
-#
-sub skip_rest
-{
-    my ($results, $test_num) = @_;
-    if( $results ) {
-        for (my $i=$test_num; $i < $__tests__; $i++) { skip(1,0,0) };
-        exit 1;
-    }
-}
-
-__END__
 
 =head1 NAME
 
-Scrub.t - test script for Test::STD::Scrub
+Scrub.t - test script for Text::Scrub
 
 =head1 SYNOPSIS
 
- Scrub.t 
+ Scrub.t -log=I<string>
+
+=head1 OPTIONS
+
+All options may be abbreviated with enough leading characters
+to distinguish it from the other options.
+
+=over 4
+
+=item C<-log>
+
+Scrub.t uses this option to redirect the test results 
+from the standard output to a log file.
+
+=back
 
 =head1 COPYRIGHT
 

@@ -5,11 +5,11 @@ Title Page
 
      Text::Scrub - Utilites to wild card parts of a text file for comparisons.
 
-     Revision: A
+     Revision: B
 
-     Version: 0.02
+     Version: 0.04
 
-     Date: 2003/07/27
+     Date: 2003/09/19
 
      Prepared for: General Public 
 
@@ -43,7 +43,7 @@ Title Page
     if there are significant changes.
 
   1.3 Document overview.
-    This document releases Text::Scrub version 0.02 providing a description
+    This document releases Text::Scrub version 0.04 providing a description
     of the inventory, installation instructions and other information
     necessary to utilize and track this release.
 
@@ -54,8 +54,8 @@ Title Page
   3.1 Inventory of materials released.
     This document releases the file found at the following repository(s):
 
-       http://www.softwarediamonds/packages/Text-Scrub-0.02
-       http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.02
+       http://www.softwarediamonds/packages/Text-Scrub-0.04
+       http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.04
 
     Restrictions regarding duplication and license provisions are as
     follows:
@@ -99,18 +99,23 @@ Title Page
 
      file                                                         version date       comment
      ------------------------------------------------------------ ------- ---------- ------------------------
-     lib/Docs/Site_SVD/Text_Scrub.pm                              0.02    2003/07/27 revised 0.01
-     MANIFEST                                                     0.02    2003/07/27 generated, replaces 0.01
-     Makefile.PL                                                  0.02    2003/07/27 generated, replaces 0.01
-     README                                                       0.02    2003/07/27 generated, replaces 0.01
-     lib/Text/Scrub.pm                                            1.09    2003/07/05 unchanged
-     t/Text/Scrub.t                                               0.07    2003/07/27 revised 0.06
-     tlib/File/Package.pm                                         1.11    2003/07/27 new
+     lib/Docs/Site_SVD/Text_Scrub.pm                              0.04    2003/09/19 revised 0.03
+     MANIFEST                                                     0.04    2003/09/19 generated, replaces 0.03
+     Makefile.PL                                                  0.04    2003/09/19 generated, replaces 0.03
+     README                                                       0.04    2003/09/19 generated, replaces 0.03
+     lib/Text/Scrub.pm                                            1.11    2003/09/19 revised 1.09
+     t/Text/Scrub.d                                               0.01    2003/09/19 new
+     t/Text/Scrub.pm                                              0.01    2003/09/19 new
+     t/Text/Scrub.t                                               0.08    2003/09/19 revised 0.07
+     tlib/File/Package.pm                                         1.12    2003/09/19 unchanged
+     tlib/Test/Tech.pm                                            1.14    2003/09/19 new
+     tlib/Data/Secs2.pm                                           1.14    2003/09/19 new
+     tlib/File/SmartNL.pm                                         1.12    2003/09/19 new
 
   3.3 Changes
     The changes are as follows:
 
-    Test-STD-Scrub 0.01
+    Test-STD-Scrub-0.01
 
         Rename Module
             At 02:44 AM 6/14/2003 +0200, Max Maischein wrote: A second thing
@@ -131,7 +136,7 @@ Title Page
         new methods
             Added the scrub_data and scrub_probe methods
 
-    Test-STD-Scrub 0.02
+    Test-STD-Scrub-0.02
         Use the new modules from the break-up of the "File::FileUtil" module
 
     Text-Scrub-0.01
@@ -145,6 +150,16 @@ Title Page
         module. The test of this module will precede immediately. The test
         support files in the tlib directory will vanish after the
         installtion.
+
+    Text-Scrub-0.03
+        Recreate distribution file with Archive::TarGzip 0.02 that uses mode
+        777 for directories instead of 666. Started to get emails from Unix
+        installers about untar not being able to change to a directory with
+        mode of 666.
+
+    Text-Scrub-0.04
+        Changes the 'stringify' module for 'Test-Tech' from 'Data::Strify'
+        to 'Data::Secs2'.
 
   3.4 Adaptation data.
     This installation requires that the installation site has the Perl
@@ -171,8 +186,8 @@ Title Page
 
         The distribution file is at the following respositories:
 
-           http://www.softwarediamonds/packages/Text-Scrub-0.02
-           http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.02
+           http://www.softwarediamonds/packages/Text-Scrub-0.04
+           http://www.perl.com/CPAN-local/authors/id/S/SO/SOFTDIA/Text-Scrub-0.04
 
     Prerequistes.
          None.
@@ -215,6 +230,7 @@ Title Page
     .t  extension for a Perl test script file
 
 2.0 SEE ALSO
-    File::Scrub
+    Text::Scrub
     Docs::US_DOD::SVD
+    Docs::US_DOD::STD
 
