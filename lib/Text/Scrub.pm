@@ -10,8 +10,8 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE);
-$VERSION = '1.16';
-$DATE = '2004/05/24';
+$VERSION = '1.17';
+$DATE = '2004/05/25';
 $FILE = __FILE__;
 
 use vars qw(@ISA @EXPORT_OK);
@@ -20,9 +20,9 @@ require Exporter;
 @EXPORT_OK = qw(scrub_architect scrub_date scrub_date_ticket scrub_date_version 
                 scrub_file_line scrub_probe scrub_test_file);
 
-use SelfLoader;
-1
-__DATA__
+# use SelfLoader;
+# 1
+# __DATA__
 
 #######
 # Blank out the Verion, Date for comparision
@@ -30,6 +30,7 @@ __DATA__
 #
 sub scrub_architect
 {
+
     ######
     # This subroutine uses no object data; therefore,
     # drop any class or object.
@@ -41,9 +42,15 @@ sub scrub_architect
     return $text unless $text;
 
     ######
-    # Blank out version and date for comparasion
+    # Blank out the architecutre name
     #
-    $text =~ s/ARCHITECTURE NAME\s*=\s*['"].*?['"]/ARCHITECTURE NAME="Perl"/ig;      
+    $text =~ s/ARCHITECTURE NAME\s*=\s*['"].*?['"]/ARCHITECTURE NAME="Perl"/ig; 
+
+    ######
+    # Blank out the osname
+    #
+    $text =~ s/OS NAME\s*=\s*['"].*?['"]/OS NAME="Site OS"/ig; 
+
     $text
 
 }

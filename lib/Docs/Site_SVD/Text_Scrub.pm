@@ -10,26 +10,26 @@ use warnings;
 use warnings::register;
 
 use vars qw($VERSION $DATE $FILE );
-$VERSION = '0.07';
-$DATE = '2004/05/24';
+$VERSION = '0.08';
+$DATE = '2004/05/25';
 $FILE = __FILE__;
 
 use vars qw(%INVENTORY);
 %INVENTORY = (
-    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.07 2004/05/24), 'revised 0.06'],
-    'MANIFEST' => [qw(0.07 2004/05/24), 'generated, replaces 0.06'],
-    'Makefile.PL' => [qw(0.07 2004/05/24), 'generated, replaces 0.06'],
-    'README' => [qw(0.07 2004/05/24), 'generated, replaces 0.06'],
-    'lib/Text/Scrub.pm' => [qw(1.16 2004/05/24), 'revised 1.13'],
+    'lib/Docs/Site_SVD/Text_Scrub.pm' => [qw(0.08 2004/05/25), 'revised 0.07'],
+    'MANIFEST' => [qw(0.08 2004/05/25), 'generated, replaces 0.07'],
+    'Makefile.PL' => [qw(0.08 2004/05/25), 'generated, replaces 0.07'],
+    'README' => [qw(0.08 2004/05/25), 'generated, replaces 0.07'],
+    'lib/Text/Scrub.pm' => [qw(1.17 2004/05/25), 'revised 1.16'],
     't/Text/Scrub.d' => [qw(0.03 2004/05/10), 'unchanged'],
     't/Text/Scrub.pm' => [qw(0.03 2004/05/10), 'unchanged'],
     't/Text/Scrub.t' => [qw(0.1 2004/05/10), 'unchanged'],
-    't/Text/File/Package.pm' => [qw(1.18 2004/05/24), 'revised 1.17'],
-    't/Text/Test/Tech.pm' => [qw(1.26 2004/05/24), 'revised 1.23'],
-    't/Text/Data/Secs2.pm' => [qw(1.26 2004/05/24), 'revised 1.21'],
-    't/Text/File/SmartNL.pm' => [qw(1.16 2004/05/24), 'revised 1.15'],
-    't/Text/Data/Str2Num.pm' => [qw(0.08 2004/05/24), 'new'],
-    't/Text/Data/Startup.pm' => [qw(0.07 2004/05/24), 'revised 0.05'],
+    't/Text/File/Package.pm' => [qw(1.18 2004/05/25), 'unchanged'],
+    't/Text/Test/Tech.pm' => [qw(1.26 2004/05/25), 'unchanged'],
+    't/Text/Data/Secs2.pm' => [qw(1.26 2004/05/25), 'unchanged'],
+    't/Text/File/SmartNL.pm' => [qw(1.16 2004/05/25), 'unchanged'],
+    't/Text/Data/Str2Num.pm' => [qw(0.08 2004/05/25), 'unchanged'],
+    't/Text/Data/Startup.pm' => [qw(0.07 2004/05/25), 'unchanged'],
 
 );
 
@@ -60,11 +60,11 @@ Docs::Site_SVD::Text_Scrub - Utilites to wild card parts of a text file for comp
 
  Docs::Site_SVD::Text_Scrub - Utilites to wild card parts of a text file for comparisons.
 
- Revision: F
+ Revision: G
 
- Version: 0.07
+ Version: 0.08
 
- Date: 2004/05/24
+ Date: 2004/05/25
 
  Prepared for: General Public 
 
@@ -103,7 +103,7 @@ pieces of software to see if there are significant changes.
 
 =head2 1.3 Document overview.
 
-This document releases Text::Scrub version 0.07
+This document releases Text::Scrub version 0.08
 providing a description of the inventory, installation
 instructions and other information necessary to
 utilize and track this release.
@@ -118,7 +118,7 @@ system file specification.
 
 This document releases the file 
 
- Text-Scrub-0.07.tar.gz
+ Text-Scrub-0.08.tar.gz
 
 found at the following repository(s):
 
@@ -205,20 +205,20 @@ consists of the following files:
 
  file                                                         version date       comment
  ------------------------------------------------------------ ------- ---------- ------------------------
- lib/Docs/Site_SVD/Text_Scrub.pm                              0.07    2004/05/24 revised 0.06
- MANIFEST                                                     0.07    2004/05/24 generated, replaces 0.06
- Makefile.PL                                                  0.07    2004/05/24 generated, replaces 0.06
- README                                                       0.07    2004/05/24 generated, replaces 0.06
- lib/Text/Scrub.pm                                            1.16    2004/05/24 revised 1.13
+ lib/Docs/Site_SVD/Text_Scrub.pm                              0.08    2004/05/25 revised 0.07
+ MANIFEST                                                     0.08    2004/05/25 generated, replaces 0.07
+ Makefile.PL                                                  0.08    2004/05/25 generated, replaces 0.07
+ README                                                       0.08    2004/05/25 generated, replaces 0.07
+ lib/Text/Scrub.pm                                            1.17    2004/05/25 revised 1.16
  t/Text/Scrub.d                                               0.03    2004/05/10 unchanged
  t/Text/Scrub.pm                                              0.03    2004/05/10 unchanged
  t/Text/Scrub.t                                               0.1     2004/05/10 unchanged
- t/Text/File/Package.pm                                       1.18    2004/05/24 revised 1.17
- t/Text/Test/Tech.pm                                          1.26    2004/05/24 revised 1.23
- t/Text/Data/Secs2.pm                                         1.26    2004/05/24 revised 1.21
- t/Text/File/SmartNL.pm                                       1.16    2004/05/24 revised 1.15
- t/Text/Data/Str2Num.pm                                       0.08    2004/05/24 new
- t/Text/Data/Startup.pm                                       0.07    2004/05/24 revised 0.05
+ t/Text/File/Package.pm                                       1.18    2004/05/25 unchanged
+ t/Text/Test/Tech.pm                                          1.26    2004/05/25 unchanged
+ t/Text/Data/Secs2.pm                                         1.26    2004/05/25 unchanged
+ t/Text/File/SmartNL.pm                                       1.16    2004/05/25 unchanged
+ t/Text/Data/Str2Num.pm                                       0.08    2004/05/25 unchanged
+ t/Text/Data/Startup.pm                                       0.07    2004/05/25 unchanged
 
 
 =head2 3.3 Changes
@@ -303,6 +303,11 @@ Cleaned up POD. Add C<scrub_architect> to C<OK_EXPORT>.
 Added code to the C<scrub_file_line> subroutine to change double quotes
 around numbers to single quotes 
 
+=item Text-Scrub-0.08
+
+Added code to the C<scrub_architect> subroutine to C<OS NAME> to
+C<Site OS>.
+
 =back
 
 =head2 3.4 Adaptation data.
@@ -341,13 +346,13 @@ Enter one of the following repositories in a web browser:
   http://www.softwarediamonds/packages/
   http://www.perl.com/CPAN/authors/id/S/SO/SOFTDIA/
 
-Right click on 'Text-Scrub-0.07.tar.gz' and download to a temporary
+Right click on 'Text-Scrub-0.08.tar.gz' and download to a temporary
 installation directory.
 Enter the following where $make is 'nmake' for microsoft
 windows; otherwise 'make'.
 
- gunzip Text-Scrub-0.07.tar.gz
- tar -xf Text-Scrub-0.07.tar
+ gunzip Text-Scrub-0.08.tar.gz
+ tar -xf Text-Scrub-0.08.tar
  perl Makefile.PL
  $make test
  $make install
@@ -438,11 +443,11 @@ __DATA__
 DISTNAME: Text-Scrub^
 REPOSITORY_DIR: packages^
 
-VERSION : 0.07^
+VERSION : 0.08^
 FREEZE: 1^
 PREVIOUS_DISTNAME:  ^
-PREVIOUS_RELEASE: 0.06^
-REVISION: F^
+PREVIOUS_RELEASE: 0.07^
+REVISION: G^
 
 AUTHOR  : SoftwareDiamonds.com E<lt>support@SoftwareDiamonds.comE<gt>^
 ABSTRACT: Utilites to wild card parts of a text file for comparisons.^
@@ -562,6 +567,11 @@ Cleaned up POD. Add C<scrub_architect> to C<OK_EXPORT>.
 
 Added code to the C<scrub_file_line> subroutine to change double quotes
 around numbers to single quotes 
+
+\=item Text-Scrub-0.08
+
+Added code to the C<scrub_architect> subroutine to C<OS NAME> to
+C<Site OS>.
 
 \=back
 
@@ -734,6 +744,8 @@ HTML:
 
 ^
 ~-~
+
+
 
 
 

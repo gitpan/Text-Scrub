@@ -331,11 +331,11 @@ Title Page
 
      Docs::Site_SVD::Text_Scrub - Utilites to wild card parts of a text file for comparisons.
 
-     Revision: F
+     Revision: G
 
-     Version: 0.07
+     Version: 0.08
 
-     Date: 2004/05/24
+     Date: 2004/05/25
 
      Prepared for: General Public 
 
@@ -372,7 +372,7 @@ Title Page
 
   1.3 Document overview.
 
-    This document releases Text::Scrub version 0.07 providing a description
+    This document releases Text::Scrub version 0.08 providing a description
     of the inventory, installation instructions and other information
     necessary to utilize and track this release.
 
@@ -384,7 +384,7 @@ Title Page
 
     This document releases the file
 
-     Text-Scrub-0.07.tar.gz
+     Text-Scrub-0.08.tar.gz
 
     found at the following repository(s):
 
@@ -441,20 +441,20 @@ Title Page
 
      file                                                         version date       comment
      ------------------------------------------------------------ ------- ---------- ------------------------
-     lib/Docs/Site_SVD/Text_Scrub.pm                              0.07    2004/05/24 revised 0.06
-     MANIFEST                                                     0.07    2004/05/24 generated, replaces 0.06
-     Makefile.PL                                                  0.07    2004/05/24 generated, replaces 0.06
-     README                                                       0.07    2004/05/24 generated, replaces 0.06
-     lib/Text/Scrub.pm                                            1.16    2004/05/24 revised 1.13
+     lib/Docs/Site_SVD/Text_Scrub.pm                              0.08    2004/05/25 revised 0.07
+     MANIFEST                                                     0.08    2004/05/25 generated, replaces 0.07
+     Makefile.PL                                                  0.08    2004/05/25 generated, replaces 0.07
+     README                                                       0.08    2004/05/25 generated, replaces 0.07
+     lib/Text/Scrub.pm                                            1.17    2004/05/25 revised 1.16
      t/Text/Scrub.d                                               0.03    2004/05/10 unchanged
      t/Text/Scrub.pm                                              0.03    2004/05/10 unchanged
      t/Text/Scrub.t                                               0.1     2004/05/10 unchanged
-     t/Text/File/Package.pm                                       1.18    2004/05/24 revised 1.17
-     t/Text/Test/Tech.pm                                          1.26    2004/05/24 revised 1.23
-     t/Text/Data/Secs2.pm                                         1.26    2004/05/24 revised 1.21
-     t/Text/File/SmartNL.pm                                       1.16    2004/05/24 revised 1.15
-     t/Text/Data/Str2Num.pm                                       0.08    2004/05/24 new
-     t/Text/Data/Startup.pm                                       0.07    2004/05/24 revised 0.05
+     t/Text/File/Package.pm                                       1.18    2004/05/25 unchanged
+     t/Text/Test/Tech.pm                                          1.26    2004/05/25 unchanged
+     t/Text/Data/Secs2.pm                                         1.26    2004/05/25 unchanged
+     t/Text/File/SmartNL.pm                                       1.16    2004/05/25 unchanged
+     t/Text/Data/Str2Num.pm                                       0.08    2004/05/25 unchanged
+     t/Text/Data/Startup.pm                                       0.07    2004/05/25 unchanged
 
   3.3 Changes
 
@@ -522,6 +522,10 @@ Title Page
         Added code to the "scrub_file_line" subroutine to change double
         quotes around numbers to single quotes
 
+    Text-Scrub-0.08
+        Added code to the "scrub_architect" subroutine to "OS NAME" to "Site
+        OS".
+
   3.4 Adaptation data.
 
     This installation requires that the installation site has the Perl
@@ -554,12 +558,12 @@ Title Page
           http://www.softwarediamonds/packages/
           http://www.perl.com/CPAN/authors/id/S/SO/SOFTDIA/
 
-        Right click on 'Text-Scrub-0.07.tar.gz' and download to a temporary
+        Right click on 'Text-Scrub-0.08.tar.gz' and download to a temporary
         installation directory. Enter the following where $make is 'nmake'
         for microsoft windows; otherwise 'make'.
 
-         gunzip Text-Scrub-0.07.tar.gz
-         tar -xf Text-Scrub-0.07.tar
+         gunzip Text-Scrub-0.08.tar.gz
+         tar -xf Text-Scrub-0.08.tar
          perl Makefile.PL
          $make test
          $make install
